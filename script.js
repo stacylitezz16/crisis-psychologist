@@ -263,3 +263,40 @@ if (statsScroll) {
         }
     });
 }
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetId = link.getAttribute('href');
+        const target = document.querySelector(targetId);
+
+        if (!target) return;
+
+        const y =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            (window.innerHeight / 2) +
+            (target.offsetHeight / 2);
+
+        window.scrollTo({
+            top: y,
+            behavior: 'smooth'
+        });
+
+        // закрытие мобильного меню
+        if (mobileNav?.classList.contains('is-open')) {
+            mobileNav.classList.remove('is-open');
+
+            menuToggle?.setAttribute(
+                'aria-expanded',
+                'false'
+            );
+
+            mobileNav.setAttribute(
+                'aria-hidden',
+                'true'
+            );
+        }
+    });
+});
