@@ -1,0 +1,265 @@
+// ===== HERO LOAD =====
+window.addEventListener('load', () => {
+    document.body.classList.add('is-loaded');
+});
+
+
+// ===== DETECT DESKTOP =====
+const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+
+// ===== MOBILE MENU =====
+const menuToggle = document.getElementById('menu-toggle');
+const mobileNav = document.getElementById('mobile-nav');
+
+if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', () => {
+        const isOpen = mobileNav.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        mobileNav.setAttribute('aria-hidden', String(!isOpen));
+
+        document.querySelector('.hero__topbar')
+            .classList.toggle('is-light', isOpen);
+
+        menuToggle.classList.toggle('is-active', isOpen);
+    });
+
+    mobileNav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            mobileNav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            mobileNav.setAttribute('aria-hidden', 'true');
+        });
+    });
+}
+
+
+// ===== MODALS =====
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const video = modal.querySelector('video');
+    if (video) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+    }
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+
+    const video = modal.querySelector('video');
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+
+    if (!document.querySelector('.modal.is-open')) {
+        document.body.style.overflow = '';
+    }
+}
+
+
+// ===== MODAL TRIGGERS =====
+document.getElementById('intro-open')
+    ?.addEventListener('click', () => openModal('intro-modal'));
+
+document.getElementById('qualification-open')
+    ?.addEventListener('click', () => {
+        const more = document.getElementById('qualification-more');
+        const expand = document.getElementById('qualification-expand');
+        const panel = document.querySelector('#qualification-modal .modal__panel');
+
+        if (more) more.setAttribute('hidden', '');
+        if (panel) panel.classList.remove('is-expanded');
+
+        if (expand) {
+            expand.textContent = 'Смотреть ещё';
+            expand.setAttribute('aria-expanded', 'false');
+        }
+
+        openModal('qualification-modal');
+    });
+
+document.querySelectorAll('[data-open-consult]')
+    .forEach(btn => btn.addEventListener('click', () => openModal('consult-modal')));
+
+
+// ===== CLOSE MODALS =====
+document.querySelectorAll('[data-close]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-close');
+        if (id) closeModal(id);
+    });
+});
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal.is-open')
+            .forEach((m) => closeModal(m.id));
+    }
+});
+
+
+// ===== TOGGLE CARDS (MOBILE CLICK / DESKTOP HOVER) =====
+function setupToggleCards(selector) {
+    const cards = document.querySelectorAll(selector);
+
+    cards.forEach((card) => {
+        const trigger = card.querySelector('[data-toggle-trigger]');
+        if (!trigger) return;
+
+        if (!isDesktop) {
+            trigger.addEventListener('click', () => {
+                const isOpen = card.classList.contains('is-open');
+
+                cards.forEach((c) => {
+                    c.classList.remove('is-open');
+                    c.querySelector('[data-toggle-trigger]')
+                        ?.setAttribute('aria-expanded', 'false');
+                });
+
+                if (!isOpen) {
+                    card.classList.add('is-open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+        } else {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('is-open');
+                trigger.setAttribute('aria-expanded', 'true');
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('is-open');
+                trigger.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+}
+
+setupToggleCards('.help [data-toggle-card]');
+setupToggleCards('.formats [data-toggle-card]');
+setupToggleCards('.faq [data-toggle-card]');
+
+
+// ===== FORM =====
+const consultForm = document.querySelector('.consult-form');
+
+if (consultForm) {
+    consultForm.addEventListener('submit', () => {
+        if (!consultForm.checkValidity()) {
+            consultForm.reportValidity();
+            return;
+        }
+
+        setTimeout(() => {
+            closeModal('consult-modal');
+            consultForm.reset();
+        }, 300);
+    });
+}
+
+
+// ===== QUALIFICATION EXPAND =====
+const expandBtn = document.getElementById('qualification-expand');
+const moreBlock = document.getElementById('qualification-more');
+const qualPanel = document.querySelector('#qualification-modal .modal__panel');
+
+if (expandBtn && moreBlock && qualPanel) {
+    expandBtn.addEventListener('click', () => {
+        const open = moreBlock.hasAttribute('hidden');
+
+        if (open) {
+            moreBlock.removeAttribute('hidden');
+            qualPanel.classList.add('is-expanded');
+            expandBtn.textContent = 'Свернуть';
+        } else {
+            moreBlock.setAttribute('hidden', '');
+            qualPanel.classList.remove('is-expanded');
+            expandBtn.textContent = 'Смотреть ещё';
+        }
+    });
+}
+
+
+// ===== FOOTER MAP =====
+const mapBtn = document.getElementById('open-map');
+const mapArrow = document.getElementById('map-arrow');
+
+if (mapBtn) {
+    const mapItem = mapBtn.closest('.footer__item--map');
+
+    [mapBtn, mapArrow].forEach(el => {
+        if (!el) return;
+
+        el.addEventListener('click', () => {
+            mapItem.classList.toggle('is-open');
+        });
+    });
+}
+
+
+// ===== HERO LOAD =====
+window.addEventListener('load', () => {
+    document.body.classList.add('is-loaded');
+});
+
+const statsScroll = document.querySelector('.stats-scroll');
+
+if (statsScroll) {
+    // стрелочки
+    statsScroll.addEventListener('scroll', () => {
+        const isAtEnd =
+            statsScroll.scrollLeft + statsScroll.clientWidth >= statsScroll.scrollWidth - 1;
+
+        document.querySelectorAll('.stat-arrow img').forEach((arrow) => {
+            arrow.style.transform = isAtEnd ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+    });
+
+    let ticking = false;
+    let currentScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const rect = statsScroll.getBoundingClientRect();
+
+                const inView =
+                    rect.top < window.innerHeight && rect.bottom > 0;
+
+                if (inView) {
+                    const start = window.innerHeight;
+                    const end = -rect.height;
+
+                    const progress = (start - rect.top) / (start - end);
+                    const clamped = Math.max(0, Math.min(1, progress));
+
+                    const maxScroll =
+                        statsScroll.scrollWidth - statsScroll.clientWidth;
+
+                    const targetScroll = maxScroll * clamped;
+
+                    const ease = 0.08;
+                    currentScroll += (targetScroll - currentScroll) * ease;
+
+                    statsScroll.scrollLeft = currentScroll;
+                }
+
+                ticking = false;
+            });
+
+            ticking = true;
+        }
+    });
+}
