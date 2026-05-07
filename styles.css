@@ -1037,14 +1037,32 @@
 
     right: clamp(0px, 2vw, 40px) !important;
     bottom: clamp(20px, 10vh, 70px) !important;
-    transform: translateX(calc(15% + 80px)) !important;
+    transform: translateX(clamp(0px, 6vw, 120px)) !important;
     opacity: 0 !important;
 
     transition: transform 0.8s ease, opacity 0.8s ease !important;
     }
 
     .is-loaded .hero__image {
-    transform: translateX(15%) !important;
+    transform: translateX(40px) !important;
+    opacity: 1 !important;
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+      .hero__image {
+     width: clamp(280px, 22vw, 700px) !important;
+    height: auto !important; 
+
+    right: clamp(0px, 2vw, 40px) !important;
+    bottom: clamp(20px, 10vh, 70px) !important;
+    transform: translateX(clamp(0px, 6vw, 120px)) !important;
+    opacity: 0 !important;
+
+    transition: transform 0.8s ease, opacity 0.8s ease !important;
+    }
+
+    .is-loaded .hero__image {
+    transform: translateX(150px) !important;
     opacity: 1 !important;
 }
 
