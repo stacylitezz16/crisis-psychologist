@@ -38,6 +38,180 @@ textarea {
     pointer-events: none !important;
 }
 
+/* ===== iPHONE 12 MINI ===== */
+@media (min-width: 360px) and (max-width: 375px) {
+
+    .hero__image {
+        right: -22px !important;
+    }
+
+    .help__cards {
+        margin-left: 10px !important;
+    }
+
+    .footer__legal {
+        gap: 10px !important;
+    }
+
+        .map-popup {
+        width: 205px !important;
+        height: 115px !important;
+    }
+
+    .footer__links li{
+        font-size: 9px !important;
+        margin: 0 !important;
+    }
+
+    .footer__identity {
+        font-size: smaller !important;
+        margin-left: 10px !important;
+    }
+
+    .footer__links img {
+        width: 10px !important;
+    }
+
+    .faq-btn {
+        font-size: 9.5px !important;
+    }
+
+    .faq-btn span img {
+        width: 12px !important;
+    }
+
+    .title {
+        font-size: 11px !important;
+    }
+
+    .container h2 h3 {
+        font-size: 8px !important;
+    }
+
+    .container p {
+        font-size: 7px !important;
+    }
+
+    .container li {
+        font-size: 7px !important;
+    }
+
+    .info-block__bottom {
+        gap: 0 !important;
+    }
+
+    .info-block__cta {
+        transform: translateX(-25px) !important;
+    }
+
+    .methods__heading {
+        font-size: 9px !important;
+    }
+
+    .methods__lead {
+        font-size: 8px !important;
+    }
+
+    .method-item h3 {
+        font-size: 9px !important;
+    }
+
+    .method-item p {
+        font-size: 7.5px !important;
+    }
+
+    .method-item img {
+        width: 40px !important;
+    }
+
+    .methods-grid {
+        gap: 12px 10px !important;
+    }
+
+    .formats__art--left {
+        width: 130px !important;
+    }
+
+    .formats__art--right {
+        width: 120px !important;
+    }
+
+
+    .formats__card .toggle-chip {
+        min-height: 25px !important;
+        min-width: 140px !important;
+        font-size: 7.5px !important;
+    }
+
+    .formats__card--bl,
+    .formats__card--br {
+        bottom: 40px !important;
+    }
+
+    .formats {
+        padding-bottom: 0 !important;
+    }
+
+    .help__lead {
+        font-size: 9px !important;
+    }
+
+    .help__card .toggle-chip {
+        height: 23px !important;
+        font-size: 7.5px !important;
+    }
+
+    .help__card .toggle-chip img {
+        width: 10px !important;
+    }
+
+    .help__cards {
+        margin-left: 20px !important;
+    }
+
+    .help__consulting-text h3 {
+        font-size: 9px !important;
+    }
+
+    .help__consulting-text p {
+        font-size: 8px !important;
+    }
+
+    .about__text h3 {
+        font-size: 9px !important;
+    }
+
+    .about__text p {
+        font-size: 7.5px !important;
+    }
+
+    .hero__subtitle {
+        font-size: 8.5px !important;
+    }
+
+    .hero__name {
+        font-size: 10.5px !important;
+    }
+
+    .hero__title {
+        font-size: 11px !important;
+    }
+
+    .hero__content {
+        top: 29px !important;
+        max-width: 150px !important;
+    }
+
+    .modal__title {
+        font-size: 15px !important;
+    }
+
+    .toggle-content {
+        padding: 8px 10px !important;
+    }
+
+}
+
 /* ===== LARGE iPHONES ===== */
 
 @media (min-width: 390px) and (max-width: 430px) {
