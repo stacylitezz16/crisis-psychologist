@@ -1,5 +1,5 @@
 // ===== HERO LOAD =====
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('is-loaded');
 });
 
@@ -210,9 +210,6 @@ if (mapBtn) {
 
 
 // ===== HERO LOAD =====
-window.addEventListener('load', () => {
-    document.body.classList.add('is-loaded');
-});
 
 const statsScroll = document.querySelector('.stats-scroll');
 
@@ -300,3 +297,29 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         }
     });
 });
+
+// ===== HERO CITY MAP TRIGGER =====
+
+const footerMapTrigger = document.getElementById('footer-map-trigger');
+
+if (footerMapTrigger) {
+
+    footerMapTrigger.addEventListener('click', () => {
+
+        const footer = document.getElementById('contacts');
+        const mapItem = document.querySelector('.footer__item--map');
+
+        if (!footer || !mapItem) return;
+
+        footer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+        setTimeout(() => {
+            mapItem.classList.add('is-open');
+        }, 700);
+
+    });
+
+}

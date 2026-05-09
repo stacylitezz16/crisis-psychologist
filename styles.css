@@ -1,3 +1,251 @@
+/* ===== DEVICE FIXES ===== */
+
+a {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+}
+
+.modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+}
+
+.modal__overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+}
+
+.modal__panel {
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+}
+
+button,
+input,
+textarea {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+}
+
+.hero__city {
+    cursor: pointer !important;
+}
+
+.hero__city img {
+    pointer-events: none !important;
+}
+
+/* ===== LARGE iPHONES ===== */
+
+@media (min-width: 390px) and (max-width: 430px) {
+
+    .hero__image {
+        right: -15px !important;
+    }
+
+    .footer__legal {
+        gap: 15px !important;
+    }
+
+    .about__cta  {
+        margin-bottom: 10px !important;
+    }
+
+    .help__cards {
+        margin-left: 20px !important;
+    }
+
+    .info-block__cta {
+        transform: translateX(-10px) !important;
+    }
+
+        .map-popup {
+        width: 205px !important;
+        height: 115px !important;
+    }
+
+    @media (min-width: 420px) and (max-width: 430px) {
+        .hero__image {
+            right: -2px !important;
+        }
+    }
+}
+
+    /* ===== SMALL MOBILE DEVICES ===== */
+
+    @media (max-width: 360px) {
+    .footer__legal {
+        gap: 5px !important;
+        font-size: 6.3px !important;
+    }
+
+        .map-popup {
+        width: 165px !important;
+        height: 95px !important;
+    }
+
+    .footer__links li{
+        font-size: 7.5px !important;
+        margin: 0 !important;
+    }
+
+    .footer__identity {
+        font-size: smaller !important;
+        margin-left: 10px !important;
+    }
+
+    .footer__links img {
+        width: 10px !important;
+    }
+
+    .faq-btn {
+        font-size: 9.5px !important;
+    }
+
+    .faq-btn span img {
+        width: 12px !important;
+    }
+
+    .title {
+        font-size: 11px !important;
+    }
+
+    .container h2 h3 {
+        font-size: 8px !important;
+    }
+
+    .container p {
+        font-size: 7px !important;
+    }
+
+    .container li {
+        font-size: 7px !important;
+    }
+
+    .info-block__bottom {
+        gap: 0 !important;
+    }
+
+    .info-block__cta {
+        transform: translateX(-25px) !important;
+    }
+
+    .methods__heading {
+        font-size: 9px !important;
+    }
+
+    .methods__lead {
+        font-size: 8px !important;
+    }
+
+    .method-item h3 {
+        font-size: 9px !important;
+    }
+
+    .method-item p {
+        font-size: 7.5px !important;
+    }
+
+    .method-item img {
+        width: 40px !important;
+    }
+
+    .methods-grid {
+        gap: 12px 10px !important;
+    }
+
+    .hero__image {
+        right: -50px !important;
+    }
+
+    .formats__art--left {
+        width: 130px !important;
+    }
+
+    .formats__art--right {
+        width: 120px !important;
+    }
+
+
+    .formats__card .toggle-chip {
+        min-height: 25px !important;
+        min-width: 140px !important;
+        font-size: 7.5px !important;
+    }
+
+    .formats__card--bl,
+    .formats__card--br {
+        bottom: 40px !important;
+    }
+
+    .formats {
+        padding-bottom: 0 !important;
+    }
+
+    .help__lead {
+        font-size: 9px !important;
+    }
+
+    .help__card .toggle-chip {
+        height: 23px !important;
+        font-size: 7.5px !important;
+    }
+
+    .help__card .toggle-chip img {
+        width: 10px !important;
+    }
+
+    .help__cards {
+        margin-left: 20px !important;
+    }
+
+    .help__consulting-text h3 {
+        font-size: 9px !important;
+    }
+
+    .help__consulting-text p {
+        font-size: 8px !important;
+    }
+
+    .about__text h3 {
+        font-size: 9px !important;
+    }
+
+    .about__text p {
+        font-size: 7.5px !important;
+    }
+
+    .hero__subtitle {
+        font-size: 8.5px !important;
+    }
+
+    .hero__name {
+        font-size: 10.5px !important;
+    }
+
+    .hero__title {
+        font-size: 11px !important;
+    }
+
+    .hero__content {
+        top: 29px !important;
+        max-width: 150px !important;
+    }
+
+    .modal__title {
+        font-size: 15px !important;
+    }
+
+    .toggle-content {
+        padding: 8px 10px !important;
+    }
+
+
+}
+
 :root {
     --bg: white;
     --dark: #27292d;
@@ -325,6 +573,8 @@
 
     .about {
         margin-left: 20px !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
     }
 
     .mobile-nav {
@@ -428,6 +678,11 @@
     .formats {
         margin-left: 20px !important;
         margin-right: 20px !important;
+        margin-top: 10px !important;
+    }
+
+    .formats .title {
+        margin-bottom: 30px !important;
     }
 
     .formats__card .toggle-chip {
@@ -471,6 +726,11 @@
     .methods-section {
         margin-left: 20px !important;
         margin-right: 20px !important;
+        margin-top: 10px !important;
+    }
+
+    .methods-grid {
+        gap: 25px 15px !important;
     }
 
 
@@ -548,6 +808,7 @@
     .formats__card .toggle-content {
         padding: 18px 20px !important;
         box-sizing: border-box !important;
+        border-radius: 5px !important;
     }
 
     .info-block__cta .btn {
@@ -562,6 +823,15 @@
         margin-left: 20px !important;
         margin-right: 20px !important;
     }
+
+    .price {
+        margin-top: 20px !important;
+    }
+
+        .price .title {
+        margin-bottom: 20px !important;
+    }
+
 
     .price__panel {
         display: grid !important;
@@ -608,6 +878,10 @@
 
     .faq {
         padding-bottom: 60px !important;
+    }
+
+    .faq .title {
+        transform: translateY(-40px) !important;
     }
 
     .faq-btn {
@@ -1044,7 +1318,7 @@
     }
 
     .is-loaded .hero__image {
-    transform: translateX(40px) !important;
+    transform: translateX(50px) !important;
     opacity: 1 !important;
 }
 
@@ -1074,6 +1348,11 @@
         display: none !important;
     }
 }
+
+#menu-toggle {
+        display: none !important;
+    }
+
 
 
     /* ABOUT */
@@ -1285,6 +1564,7 @@
         width: max-content !important;
         max-width: 590px !important;
         margin-top: 15px !important;
+        margin-bottom: 15px !important;
         border-radius: 10px !important;
     }
 
@@ -1517,7 +1797,7 @@
 
     .footer__legal {
         gap: clamp(16px, 3vw, 50px) !important;
-        bottom: -70px !important;
+        bottom: -55px !important;
         justify-content: space-between !important;
         margin-left: 20px !important;
         margin-right: 20px !important;
@@ -1952,7 +2232,6 @@ li {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 8px;
 }
 
 .hero__topbar {
@@ -2371,7 +2650,7 @@ li {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -2417,7 +2696,6 @@ li {
     padding: 8px 0;
     font-family: "Inter", sans-serif;
     font-weight: 400;
-    border-radius: 3px;
 }
 
 .info-block__inner {
@@ -2491,7 +2769,6 @@ li {
 
 .price__panel {
     font-size: 9px;
-    border-radius: 3px;
     padding: 25px;
     padding-left: 0;
     padding-right: 0;
@@ -3060,7 +3337,6 @@ li {
     position: relative;
     z-index: 1;
     overflow: visible;
-    border-radius: 3px;
     padding: 14px 6px 10px;
     background: url('img/work-bg.jpg') center/cover no-repeat;
 }
@@ -3114,6 +3390,7 @@ li {
     white-space: nowrap;
     overflow: hidden;
     letter-spacing: -0.5px;
+    border-radius: 3px;
 }
 
 .toggle-chip img {
@@ -3229,7 +3506,7 @@ li {
 }
 
 .formats__card .toggle-chip {
-    padding: 4px 6px;
+    padding: 4px 7px;
     font-size: 9px;
     background: #272727;
     border-radius: 3px;
@@ -3253,7 +3530,7 @@ li {
     height: auto;
     text-align: left;
     line-height: 1.9;
-    padding: 5px 8px;
+    padding: 5px 10px;
     box-sizing: border-box;
     margin-top: 6px;
     background: #f1f1f1;
