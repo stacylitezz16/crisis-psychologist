@@ -5,6 +5,12 @@ a {
     -webkit-text-fill-color: inherit !important;
 }
 
+.faq-btn {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .modal {
     position: fixed !important;
     inset: 0 !important;
