@@ -1269,11 +1269,11 @@ textarea {
     }
 
     .consult-form .btn--submit {
-        margin-top: auto !important;
+        margin-top: 20px !important;
         font-size: 15px !important;
         padding: 14px 20px !important;
-            width: 140px !important;
-    min-width: 140px !important;
+        width: 140px !important;
+        min-width: 140px !important;
     }
 
 #intro-modal .modal__panel--video {
@@ -1322,8 +1322,9 @@ textarea {
     }
 
     .consent-row input[type="checkbox"] {
-        width: 12px !important;
-        height: 12px !important;
+        width: 18px !important;
+        height: 18px !important;
+        margin: 0 !important;
     }
 
     .container {
@@ -2245,6 +2246,12 @@ textarea {
         opacity: 0.7 !important;
 
 }
+
+  .consent-row input[type="checkbox"] {
+        width: 20px !important;
+        height: 20px !important;
+        margin: 0 !important;
+    }
 }
 
 .footer a {
@@ -3419,10 +3426,10 @@ li {
 .consent-row {
     display: flex;
     align-items: flex-start;
-    gap: 6px;
+    gap: 5px;
     font-size: 9px;
     color: white;
-    cursor: pointer;
+    flex-wrap: wrap;
 }
 
 .first-row {
@@ -3432,12 +3439,17 @@ li {
 .consent-row input[type="checkbox"] {
     width: 14px;
     height: 14px;
-    flex-shrink: 0;
-    margin-top: 2px;
     accent-color: #fff;
     position: relative;
     z-index: 5;
+    cursor: pointer;
+    flex-shrink: 0;
 }
+
+.consent-row label {
+    cursor: pointer;
+}
+
 
 .consent-row input {
     pointer-events: auto;
