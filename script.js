@@ -1,10 +1,8 @@
 // ===== HERO LOAD =====
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.classList.add('is-loaded');
-
+window.addEventListener('load', () => {
     setTimeout(() => {
-        document.body.classList.add('is-animated');
-    }, 50);
+        document.body.classList.add('is-loaded');
+    }, 100);
 });
 
 
