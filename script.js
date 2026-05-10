@@ -1,6 +1,10 @@
 // ===== HERO LOAD =====
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('is-loaded');
+
+    setTimeout(() => {
+        document.body.classList.add('is-animated');
+    }, 50);
 });
 
 
@@ -48,7 +52,38 @@ function openModal(id) {
         video.currentTime = 0;
         video.play().catch(() => {});
     }
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const video = modal.querySelector('video');
+    if (video) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+    }
+
+    // === АВТОЦЕНТРОВКА КАРТЫ ===
+    if (id === 'map-modal') {
+        const iframe = document.getElementById('map-frame');
+        if (iframe) {
+            const isMobile = window.innerWidth <= 768;
+            const zoom = isMobile ? '12' : '16'; // На мобилке шире
+            const center = '30.3158,59.9398'; // Думская 5/22, СПб
+
+            // Генерируем ссылку с маркером
+           const src = `https://yandex.ru/map-widget/v1/?ll=30.3160,59.9391&z=${zoom}`;
+
+
+            iframe.src = src; // Подставляем
+        }
+    }
 }
+
+    }
 
 function closeModal(id) {
     const modal = document.getElementById(id);
@@ -66,6 +101,31 @@ function closeModal(id) {
     if (!document.querySelector('.modal.is-open')) {
         document.body.style.overflow = '';
     }
+
+    function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+
+    const video = modal.querySelector('video');
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+
+    // === ОЧИСТКА КАРТЫ ===
+    if (id === 'map-modal') {
+        const iframe = document.getElementById('map-frame');
+        if (iframe) iframe.src = '';
+    }
+
+    if (!document.querySelector('.modal.is-open')) {
+        document.body.style.overflow = '';
+    }
+}
+
 }
 
 
@@ -134,15 +194,15 @@ function setupToggleCards(selector) {
                 }
             });
         } else {
-            card.addEventListener('mouseenter', () => {
-                card.classList.add('is-open');
-                trigger.setAttribute('aria-expanded', 'true');
-            });
+trigger.addEventListener('mouseenter', () => {
+    card.classList.add('is-open');
+    trigger.setAttribute('aria-expanded', 'true');
+});
 
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('is-open');
-                trigger.setAttribute('aria-expanded', 'false');
-            });
+card.addEventListener('mouseleave', () => {
+    card.classList.remove('is-open');
+    trigger.setAttribute('aria-expanded', 'false');
+});
         }
     });
 }
@@ -214,51 +274,127 @@ if (mapBtn) {
 const statsScroll = document.querySelector('.stats-scroll');
 
 if (statsScroll) {
-    // стрелочки
+
+    // ===== DRAG TO SCROLL =====
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    statsScroll.addEventListener('mousedown', (e) => {
+
+        isDown = true;
+
+        statsScroll.classList.add('is-dragging');
+
+        startX = e.pageX - statsScroll.offsetLeft;
+        scrollLeft = statsScroll.scrollLeft;
+
+    });
+
+    statsScroll.addEventListener('mouseleave', () => {
+
+        isDown = false;
+
+        statsScroll.classList.remove('is-dragging');
+
+    });
+
+    statsScroll.addEventListener('mouseup', () => {
+
+        isDown = false;
+
+        statsScroll.classList.remove('is-dragging');
+
+    });
+
+    statsScroll.addEventListener('mousemove', (e) => {
+
+        if (!isDown) return;
+
+        e.preventDefault();
+
+        const x = e.pageX - statsScroll.offsetLeft;
+        const walk = (x - startX) * 1.2;
+
+        statsScroll.scrollLeft = scrollLeft - walk;
+
+    });
+
+
+    // ===== СТРЕЛОЧКИ =====
+
     statsScroll.addEventListener('scroll', () => {
+
         const isAtEnd =
-            statsScroll.scrollLeft + statsScroll.clientWidth >= statsScroll.scrollWidth - 1;
+            statsScroll.scrollLeft + statsScroll.clientWidth >=
+            statsScroll.scrollWidth - 1;
 
         document.querySelectorAll('.stat-arrow img').forEach((arrow) => {
-            arrow.style.transform = isAtEnd ? 'rotate(180deg)' : 'rotate(0deg)';
+
+            arrow.style.transform =
+                isAtEnd ? 'rotate(180deg)' : 'rotate(0deg)';
+
         });
+
     });
+
+
+    // ===== АВТОСКРОЛЛ =====
 
     let ticking = false;
     let currentScroll = 0;
 
     window.addEventListener('scroll', () => {
+
         if (!ticking) {
+
             window.requestAnimationFrame(() => {
-                const rect = statsScroll.getBoundingClientRect();
+
+                const rect =
+                    statsScroll.getBoundingClientRect();
 
                 const inView =
-                    rect.top < window.innerHeight && rect.bottom > 0;
+                    rect.top < window.innerHeight &&
+                    rect.bottom > 0;
 
-                if (inView) {
+                if (inView && !isDown) {
+
                     const start = window.innerHeight;
                     const end = -rect.height;
 
-                    const progress = (start - rect.top) / (start - end);
-                    const clamped = Math.max(0, Math.min(1, progress));
+                    const progress =
+                        (start - rect.top) / (start - end);
+
+                    const clamped =
+                        Math.max(0, Math.min(1, progress));
 
                     const maxScroll =
-                        statsScroll.scrollWidth - statsScroll.clientWidth;
+                        statsScroll.scrollWidth -
+                        statsScroll.clientWidth;
 
-                    const targetScroll = maxScroll * clamped;
+                    const targetScroll =
+                        maxScroll * clamped;
 
                     const ease = 0.08;
-                    currentScroll += (targetScroll - currentScroll) * ease;
+
+                    currentScroll +=
+                        (targetScroll - currentScroll) * ease;
 
                     statsScroll.scrollLeft = currentScroll;
+
                 }
 
                 ticking = false;
+
             });
 
             ticking = true;
+
         }
+
     });
+
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -323,3 +459,142 @@ if (footerMapTrigger) {
     });
 
 }
+
+// ===== ORPHANS FIX =====
+function fixOrphans(root = document.body) {
+    const wordsToGlue = ['в','и','к','с','у','о','а','из','за','на','по','для','от','до'];
+
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+
+    let node;
+    while (node = walker.nextNode()) {
+        let text = node.nodeValue;
+
+        wordsToGlue.forEach(word => {
+            const regex = new RegExp(`\\s(${word})\\s`, 'gi');
+            text = text.replace(regex, ` $1\u00A0`);
+        });
+
+        node.nodeValue = text;
+    }
+}
+
+
+let lastSubmitTime = 0;
+
+if (consultForm) {
+    consultForm.addEventListener('submit', (e) => {
+
+        const now = Date.now();
+
+        if (now - lastSubmitTime < 10000) {
+            e.preventDefault();
+            alert('Подождите немного перед отправкой новой формы');
+            return;
+        }
+
+        if (!consultForm.checkValidity()) {
+            e.preventDefault();
+            consultForm.reportValidity();
+            return;
+        }
+
+        lastSubmitTime = now;
+    });
+}
+
+consultForm.addEventListener('submit', (e) => {
+    const honeypot = consultForm.querySelector('[name="website"]');
+
+    if (honeypot && honeypot.value.trim() !== '') {
+        e.preventDefault();
+        return;
+    }
+});
+
+let formOpenedAt = Date.now();
+
+consultForm.addEventListener('submit', (e) => {
+    const timeSpent = Date.now() - formOpenedAt;
+
+    if (timeSpent < 3000) {
+        e.preventDefault();
+        return;
+    }
+});
+
+let lastPayload = '';
+
+consultForm.addEventListener('submit', (e) => {
+    const data = new FormData(consultForm);
+    const payload = JSON.stringify(Object.fromEntries(data));
+
+    if (payload === lastPayload) {
+        e.preventDefault();
+        return;
+    }
+
+    lastPayload = payload;
+});
+
+function isGarbageText(text) {
+    const clean = text
+        .toLowerCase()
+        .replace(/\s/g, '');
+
+    // 1. слишком длинная последовательность одинаковых/похожих букв
+    const repeatedPattern = /(.)\1{4,}/i;
+    if (repeatedPattern.test(clean)) return true;
+
+    // 2. слишком низкое разнообразие символов
+    const uniqueChars = new Set(clean).size;
+    if (clean.length > 10 && uniqueChars < 4) return true;
+
+    // 3. нет гласных (для кириллицы/латиницы)
+    const hasVowels = /[aeiouаеёиоуыэюя]/i.test(clean);
+    if (clean.length > 6 && !hasVowels) return true;
+
+    return false;
+}
+
+consultForm.addEventListener('submit', (e) => {
+    if (!consultForm.checkValidity()) {
+        consultForm.reportValidity();
+        return;
+    }
+
+    const message = consultForm.querySelector('textarea[name="comment"]');
+
+    if (message && isGarbageText(message.value)) {
+        e.preventDefault();
+
+        alert('Введите корректные данные.');
+        return;
+    }
+
+    setTimeout(() => {
+        closeModal('consult-modal');
+        consultForm.reset();
+    }, 300);
+});
+
+const phone = consultForm.querySelector('input[name="phone"]');
+
+function isValidPhone(value) {
+    const v = value.trim();
+
+    // только цифры + допустимые символы + нормальная длина
+    return /^[\d\s()+-]{7,20}$/.test(v);
+}
+
+// Открытие карты
+document.getElementById('open-map')?.addEventListener('click', () => {
+    openModal('map-modal');
+});
+
+// Закрытие по оверлею (если есть)
+document.querySelector('#map-modal .modal__overlay')?.addEventListener('click', () => {
+    closeModal('map-modal');
+});
+
+

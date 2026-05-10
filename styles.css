@@ -1,3 +1,24 @@
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: none;
+}
+
+/* IE/old Edge */
+* {
+    -ms-overflow-style: none;
+}
+
+.stats-scroll {
+    overflow-x: auto;
+}
+
 /* ===== DEVICE FIXES ===== */
 
 a {
@@ -45,7 +66,7 @@ textarea {
 }
 
 /* ===== iPHONE 12 MINI ===== */
-@media (min-width: 360px) and (max-width: 375px) {
+@media (min-width: 360px) and (max-width: 389px) {
 
     .hero__image {
         right: -22px !important;
@@ -650,13 +671,13 @@ textarea {
     }
 
     .stats-scroll {
-        margin-top: 35px !important;
+        margin-top: 50px !important;
     }
 
     .stat-card {
         width: 339px !important;
         min-height: 89px !important;
-        border-radius: 5px !important;
+        border-radius: 8px !important;
     }
 
     .stat-card strong {
@@ -670,6 +691,7 @@ textarea {
     .about__cta {
         width: 157px !important;
         height: 47px !important;
+        margin-bottom: 20px !important;
     }
 
     .page {
@@ -858,7 +880,7 @@ textarea {
     .formats {
         margin-left: 20px !important;
         margin-right: 20px !important;
-        margin-top: 10px !important;
+        margin-top: 20px !important;
     }
 
     .formats .title {
@@ -906,7 +928,7 @@ textarea {
     .methods-section {
         margin-left: 20px !important;
         margin-right: 20px !important;
-        margin-top: 10px !important;
+        margin-top: 5px !important;
     }
 
     .methods-grid {
@@ -1005,7 +1027,7 @@ textarea {
     }
 
     .price {
-        margin-top: 20px !important;
+        margin-top: 30px !important;
     }
 
         .price .title {
@@ -1103,7 +1125,6 @@ textarea {
 
     .faq .title {
         margin-top: 50px !important;
-        margin-bottom: 70px !important;
     }
 
     .faq-list {
@@ -1300,7 +1321,7 @@ textarea {
         line-height: 1.2 !important;
     }
 
-    .consent-row checkbox {
+    .consent-row input[type="checkbox"] {
         width: 12px !important;
         height: 12px !important;
     }
@@ -1651,11 +1672,10 @@ textarea {
 }
 
 .toggle-content {
-    padding: 16px 20px !important;
+    padding: 20px 40px !important;
     margin: 0 auto !important;
     margin-top: 15px !important;
-    text-align: justify !important;
-    hyphens: auto !important;
+    hyphens: none !important;
 }
 
 #consult-modal .btn--submit {
@@ -1746,6 +1766,7 @@ textarea {
         margin-top: 15px !important;
         margin-bottom: 15px !important;
         border-radius: 10px !important;
+        padding: 20px 40px !important;
     }
 
     .formats__card .toggle-content p {
@@ -1758,6 +1779,8 @@ textarea {
         margin-top: 60px !important;
         margin-bottom: 60px !important;
         min-height: 650px !important;
+        margin-left: 40px !important;
+        margin-right: 30px !important;
     }
 
     #methods h2 {
@@ -1769,7 +1792,8 @@ textarea {
     }
 
     .methods-grid {
-        gap: 50px 10px !important;
+        gap: 50px 0 !important;
+        margin-left: 30px !important;
     }
 
     .method-item {
@@ -1787,7 +1811,7 @@ textarea {
     width: min(100%, 1600px) !important;
     margin: 0 auto !important;
     padding: 0 clamp(16px, 3vw, 48px) !important;
-    padding: 20px 40px !important;
+    padding: 20px 70px !important;
 }
 
 .info-block {
@@ -1932,6 +1956,7 @@ textarea {
         margin-top: 8px !important;
         box-sizing: border-box !important;
         border-radius: 10px !important;
+        padding: 20px 40px !important;
     }
 
     .faq::before {
@@ -2028,12 +2053,24 @@ textarea {
     /* МОДАЛКА */
     #consult-modal .modal__panel {
         width: 600px !important;
-        height: 650px !important;
+        height: 670px !important;
         border-radius: 10px !important;
     }
 
     .consult-form {
         gap: 12px !important;
+    }
+
+    #consult-modal .modal__panel .modal__title {
+        margin-bottom: 0 !important;
+    }
+
+    #consult-modal .modal__panel .btn--cta {
+        margin-top: 23px !important;
+    }
+
+    .first-row {
+        margin-top: 13px !important;
     }
 
     .consult-form input,
@@ -2260,7 +2297,7 @@ h3,
 
 .map-popup iframe {
     width: 100%;
-    height: 300px;
+    height: 100px;
     display: block;
     border: none;
 }
@@ -2856,6 +2893,8 @@ li {
     max-width: 300px;
     width: max-content;
     text-align: left;
+    white-space: normal;
+    word-break: break-word;
 }
 
 
@@ -3033,6 +3072,12 @@ li {
     border-radius: 8px;
     padding: 4px;
     position: relative;
+    
+}
+
+
+.faq-item.is-open {
+    z-index: 20;
 }
 
 .faq-btn {
@@ -3048,6 +3093,7 @@ li {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    z-index: 2;
 }
 
 .faq-answer {
@@ -3067,6 +3113,7 @@ li {
     line-height: 1.4;
     box-sizing: border-box;
     margin-top: 5px;
+    z-index: 1;
 }
 
 .faq-item.is-open .faq-answer {
@@ -3334,6 +3381,8 @@ li {
     width: calc(100% - 56px);
     max-width: 340px;
     padding: 14px 12px;
+    position: relative;
+    z-index: 200;
 }
 
 .consult-modal .modal__title {
@@ -3345,12 +3394,12 @@ li {
 .consult-modal .modal__lead {
     font-size: 10px;
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
 }
 
 .consult-form {
     display: grid;
-    gap: 8px;
+    gap: 5px;
 }
 
 .consult-form input,
@@ -3369,16 +3418,29 @@ li {
 
 .consent-row {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10px;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 9px;
     color: white;
+    cursor: pointer;
+}
+
+.first-row {
+    margin-top: 15px;
+}
+
+.consent-row input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: #fff;
+    position: relative;
+    z-index: 5;
 }
 
 .consent-row input {
-    width: 14px;
-    height: 14px;
-    accent-color: #fff;
+    pointer-events: auto;
 }
 
 .consent-row a {
@@ -3389,7 +3451,7 @@ li {
 .btn--submit {
     width: 120px;
     min-width: 120px;
-    margin: 6px auto 0;
+    margin: 6px auto 5px;
     padding: 10px 10px;
     font-size: 12px;
 }
