@@ -4,6 +4,30 @@
     box-sizing: border-box;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.consent-row {
+    touch-action: manipulation;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.modal:not(.is-open),
+.mobile-nav:not(.is-open),
+.lightbox:not(.is-open) {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.mobile-nav { z-index: 1000; }
+.modal { z-index: 2000; }
+.lightbox { z-index: 3000; }
+.consult-form { z-index: 4000; }
+
 .modal,
 .modal * {
     -webkit-overflow-scrolling: touch;
@@ -1489,6 +1513,7 @@ textarea {
 
     .hero {
         min-height: clamp(670px, 80vh, 1000px) !important;
+        border-radius: 10px !important;
     }
 
     .hero__bg {
@@ -1498,7 +1523,7 @@ textarea {
     }
 
     .hero__topbar {
-            width: 100% !important;
+    width: 100% !important;
     max-width: none !important;
         height: 50px !important;
         padding: 10px 40px !important;
@@ -1514,21 +1539,21 @@ textarea {
 
     .hero__content {
         max-width: 600px !important;
-        transform: translateY(17px) !important;
+        transform: translateY(30px) !important;
         margin-left: 30px !important;
     }
 
     .hero__name {
-        font-size: 28px !important;
+        font-size: 32px !important;
     }
 
     .hero__title {
-        font-size: 35px !important;
+        font-size: 40px !important;
         margin: 15px 0 !important;
     }
 
     .hero__subtitle {
-        font-size: 20px !important;
+        font-size: 24px !important;
         margin-top: 30px !important;
     }
 
@@ -1560,8 +1585,8 @@ textarea {
      width: clamp(280px, 22vw, 700px) !important;
     height: auto !important; 
 
-    right: clamp(0px, 2vw, 40px) !important;
-    bottom: clamp(20px, 10vh, 70px) !important;
+    right: clamp(0px, 2vw, 5px) !important;
+    bottom: clamp(60px, 14vh, 140px) !important;
     transform: translateX(clamp(0px, 6vw, 120px)) !important;
     opacity: 0 !important;
 
@@ -1579,6 +1604,20 @@ textarea {
 
     .mobile-nav {
         display: none !important;
+    }
+
+        .hero__name {
+        font-size: 28px !important;
+    }
+
+    .hero__title {
+        font-size: 34px !important;
+        margin: 15px 0 !important;
+    }
+
+    .hero__subtitle {
+        font-size: 20px !important;
+        margin-top: 30px !important;
     }
 }
 
@@ -1619,8 +1658,18 @@ textarea {
     margin-bottom: 50px !important;
 }
 
+    .stat-card {
+    justify-content: center !important;
+    align-items: center !important;
+    padding-left: 25px !important;
+    }
+
     .stat-card strong {
         font-size: 24px !important;
+    }
+
+    .stats-scroll {
+    margin-right: 25px !important;
     }
 
     .about__text p {
@@ -1681,6 +1730,7 @@ textarea {
     .help__stage {
         padding: 100px 20px !important;
         background: url('img/PC-work.jpg') center/cover no-repeat !important;
+        border-radius: 10px !important;
     }
 
     .help__cta {
@@ -1798,7 +1848,7 @@ textarea {
         margin-top: 15px !important;
         margin-bottom: 15px !important;
         border-radius: 10px !important;
-        padding: 20px 40px !important;
+        padding: 11px 20px !important;
     }
 
     .formats__card .toggle-content p {
@@ -1988,7 +2038,7 @@ textarea {
         margin-top: 8px !important;
         box-sizing: border-box !important;
         border-radius: 10px !important;
-        padding: 20px 40px !important;
+        padding: 11.5px 20.5px !important;
     }
 
     .faq::before {
@@ -2796,8 +2846,9 @@ li {
 .about__text h3 {
     font-size: 11px;
     margin: 0 0 8px;
-    font-weight: 600;
+    font-weight: 700 !important;
 }
+
 
 .about__text p {
     font-size: 9px;
@@ -2841,8 +2892,9 @@ li {
     gap: 4px;
     margin-top: 14px;
     padding-bottom: 6px;
-    margin-left: -9px;
     align-items: center;
+    margin-left: 0;
+    justify-content: flex-start;
     scrollbar-width: none;
 }
 
@@ -3465,6 +3517,8 @@ li {
     flex-wrap: wrap;
     cursor: pointer;
     touch-action: manipulation;
+    position: relative;
+    z-index: 6000;
 }
 
 .first-row {
@@ -3477,10 +3531,12 @@ li {
     accent-color: #fff;
     position: relative;
     z-index: 5;
+    z-index: 7000;
     cursor: pointer;
     flex-shrink: 0;
     margin: 0 !important;
     cursor: pointer;
+    pointer-events: auto !important;
 }
 
 .consult-form input:not([type="checkbox"]),

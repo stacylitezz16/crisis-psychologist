@@ -611,3 +611,35 @@ document.querySelectorAll('.consent-row').forEach(row => {
     });
 
 });
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ===== CLOSE ALL MODALS SAFETY =====
+    function closeAllModals() {
+        document.querySelectorAll('.modal.is-open').forEach(m => {
+            m.classList.remove('is-open');
+            m.setAttribute('aria-hidden', 'true');
+        });
+
+        document.querySelector('.mobile-nav')?.classList.remove('is-open');
+        document.querySelector('.lightbox')?.classList.remove('is-open');
+    }
+
+    // ===== OPTIONAL: enforce one modal at a time =====
+    window.closeAllModals = closeAllModals;
+
+    // ===== CHECKBOX FIX =====
+    document.querySelectorAll('.consent-row').forEach(row => {
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        if (!checkbox) return;
+
+        row.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+
+            if (e.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+    });
+
+});
