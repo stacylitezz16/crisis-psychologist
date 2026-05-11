@@ -1,3 +1,37 @@
+
+/* Скрываем настоящий чекбокс */
+.consent-row input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Создаём кастомный квадрат */
+.consent-row::before {
+    content: "";
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-top: 2px;
+    background-color: white;
+    margin-top: 4px;
+    
+}
+
+/* Галочка при checked */
+.consent-row input[type="checkbox"]:checked + .consent-text::after {
+    content: "✓";
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    font-size: 18px;
+}
+
 *,
 *::before,
 *::after {
