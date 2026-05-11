@@ -5,20 +5,20 @@
     opacity: 0;
     width: 0;
     height: 0;
+    pointer-events: none;
+    clip: rect(0 0 0 0);
 }
 
 /* Создаём кастомный квадрат */
 .consent-row::before {
     content: "";
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     border: 2px solid black;
     border-radius: 4px;
-    margin-top: 2px;
     background-color: white;
-    margin-top: 4px;
-    
+    margin-left: 4px;
 }
 
 /* Галочка при checked */
@@ -27,9 +27,9 @@
     color: black;
     font-weight: bold;
     position: absolute;
-    left: 4px;
-    top: 1px;
-    font-size: 18px;
+    left: 5px;
+    top: -2px;
+    font-size: 14px;
 }
 
 *,
@@ -791,6 +791,7 @@ textarea {
 
     .hero {
         min-height: 600px;
+        border-radius: 6px !important;
     }
 
     .hero__bg {
@@ -875,6 +876,16 @@ textarea {
         padding: 20px 16px;
     }
 
+    .consent-row::before {
+    width: 16px;
+    height: 16px;
+}
+
+/* Галочка при checked */
+.consent-row input[type="checkbox"]:checked + .consent-text::after {
+    font-size: 16px;
+}
+
     .btn--cta {
         padding: 13px 20px !important;
         font-size: 18px !important;
@@ -946,6 +957,7 @@ textarea {
 
     .help__stage {
         padding: 100px 20px !important;
+        border-radius: 6px !important;
     }
 
     .help__cta {
@@ -1133,6 +1145,7 @@ textarea {
         align-items: start !important;
         gap: 40px !important;
         padding-right: 60px !important;
+        border-radius: 6px !important;
     }
 
     .price__list {
@@ -1422,6 +1435,10 @@ textarea {
 
     .container {
         max-height: none !important;
+    }
+
+    .info-block {
+        border-radius: 6px !important;
     }
 
     .info-block__text {
@@ -2372,6 +2389,16 @@ textarea {
         margin: 0 !important;
         cursor: pointer;
     }
+
+    .consent-row::before {
+    width: 20px;
+    height: 20px;
+}
+
+/* Галочка при checked */
+.consent-row input[type="checkbox"]:checked + .consent-text::after {
+    font-size: 18px;
+}
 }
 
 .footer a {
@@ -3044,6 +3071,7 @@ li {
     padding: 8px 0;
     font-family: "Inter", sans-serif;
     font-weight: 400;
+    border-radius: 4px;
 }
 
 .info-block__inner {
@@ -3122,6 +3150,7 @@ li {
     padding-right: 0;
     color: #fff;
     background: url('img/price-bg.jpg') center/cover no-repeat;
+    border-radius: 4px;
 }
 
 .price__panel p {
@@ -3563,7 +3592,7 @@ li {
     margin-top: 15px;
 }
 
-.consent-row input[type="checkbox"] {
+/* .consent-row input[type="checkbox"] {
     width: 14px;
     height: 14px;
     accent-color: #fff;
@@ -3575,7 +3604,7 @@ li {
     margin: 0 !important;
     cursor: pointer;
     pointer-events: auto !important;
-}
+} */
 
 .consult-form input:not([type="checkbox"]),
 .consult-form textarea {
@@ -3728,6 +3757,7 @@ li {
     overflow: visible;
     padding: 14px 6px 10px;
     background: url('img/work-bg.jpg') center/cover no-repeat;
+    border-radius: 4px;
 }
 
 .help__lead {
