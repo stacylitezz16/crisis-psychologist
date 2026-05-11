@@ -1543,7 +1543,7 @@ textarea {
 
     .hero__content {
         max-width: 600px !important;
-        transform: translateY(30px) !important;
+        transform: translateY(10px) !important;
         margin-left: 30px !important;
     }
 
