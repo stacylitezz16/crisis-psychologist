@@ -581,18 +581,33 @@ const phone = consultForm.querySelector('input[name="phone"]');
 function isValidPhone(value) {
     const v = value.trim();
 
-    // только цифры + допустимые символы + нормальная длина
     return /^[\d\s()+-]{7,20}$/.test(v);
 }
 
-// Открытие карты
-document.getElementById('open-map')?.addEventListener('click', () => {
-    openModal('map-modal');
+document.querySelectorAll('.consent-row').forEach(row => {
+
+    const checkbox = row.querySelector('input[type="checkbox"]');
+
+    row.addEventListener('click', function(e) {
+
+        // ссылку НЕ трогаем
+        if (e.target.closest('a')) {
+            return;
+        }
+
+        // если клик был не по самому checkbox
+        if (e.target !== checkbox) {
+
+            e.preventDefault();
+
+            checkbox.checked = !checkbox.checked;
+
+            // триггер change на всякий случай
+            checkbox.dispatchEvent(new Event('change', {
+                bubbles: true
+            }));
+        }
+
+    });
+
 });
-
-// Закрытие по оверлею (если есть)
-document.querySelector('#map-modal .modal__overlay')?.addEventListener('click', () => {
-    closeModal('map-modal');
-});
-
-

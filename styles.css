@@ -1347,12 +1347,15 @@ textarea {
     .consent-row {
         font-size: 15px !important;
         line-height: 1.2 !important;
+        cursor: pointer;
+        touch-action: manipulation;
     }
 
     .consent-row input[type="checkbox"] {
         width: 18px !important;
         height: 18px !important;
         margin: 0 !important;
+        cursor: pointer;
     }
 
     .container {
@@ -2279,6 +2282,7 @@ textarea {
         width: 20px !important;
         height: 20px !important;
         margin: 0 !important;
+        cursor: pointer;
     }
 }
 
@@ -3459,6 +3463,8 @@ li {
     font-size: 9px;
     color: white;
     flex-wrap: wrap;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 .first-row {
@@ -3474,6 +3480,7 @@ li {
     cursor: pointer;
     flex-shrink: 0;
     margin: 0 !important;
+    cursor: pointer;
 }
 
 .consult-form input:not([type="checkbox"]),
@@ -3487,11 +3494,6 @@ li {
 
 .consent-row label {
     cursor: pointer;
-}
-
-
-.consent-row input {
-    pointer-events: auto;
 }
 
 .consent-row a {
