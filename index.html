@@ -575,11 +575,16 @@
     <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
     <textarea name="comment" placeholder="Можете оставить ваш комментарий"></textarea>
 
-<div class="consent-row first-row" data-checkbox="privacy">
+<label class="consent-row first-row" for="privacy">
 
-    <input type="checkbox" id="privacy" name="privacy" required />
+    <input
+        type="checkbox"
+        id="privacy"
+        name="privacy"
+        required
+    />
 
-    <div class="consent-text">
+    <span class="consent-text">
         Я согласен с
         <a href="source/Politika_konfidentsialnosti_2026.pdf"
            class="doc-link"
@@ -587,15 +592,20 @@
            rel="noopener">
            Политикой конфиденциальности
         </a>
-    </div>
+    </span>
 
-</div>
+</label>
 
-<div class="consent-row" data-checkbox="offer">
+<label class="consent-row" for="offer">
 
-    <input type="checkbox" id="offer" name="offer" required />
+    <input
+        type="checkbox"
+        id="offer"
+        name="offer"
+        required
+    />
 
-    <div class="consent-text">
+    <span class="consent-text">
         Я принимаю условия
         <a href="source/Publichnaya_oferta_2026.pdf"
            class="doc-link"
@@ -603,9 +613,9 @@
            rel="noopener">
            Публичной оферты
         </a>
-    </div>
+    </span>
 
-</div>
+</label>
 
     <button type="submit" class="btn btn--light btn--submit btn--cta">
         Записаться

@@ -46,19 +46,7 @@ function openModal(id) {
     document.body.style.overflow = 'hidden';
 
     const video = modal.querySelector('video');
-    if (video) {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-    }
-function openModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
 
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-
-    const video = modal.querySelector('video');
     if (video) {
         video.currentTime = 0;
         video.play().catch(() => {});
@@ -67,21 +55,18 @@ function openModal(id) {
     // === АВТОЦЕНТРОВКА КАРТЫ ===
     if (id === 'map-modal') {
         const iframe = document.getElementById('map-frame');
+
         if (iframe) {
             const isMobile = window.innerWidth <= 768;
-            const zoom = isMobile ? '12' : '16'; // На мобилке шире
-            const center = '30.3158,59.9398'; // Думская 5/22, СПб
+            const zoom = isMobile ? '12' : '16';
 
-            // Генерируем ссылку с маркером
-           const src = `https://yandex.ru/map-widget/v1/?ll=30.3160,59.9391&z=${zoom}`;
+            const src =
+                `https://yandex.ru/map-widget/v1/?ll=30.3160,59.9391&z=${zoom}`;
 
-
-            iframe.src = src; // Подставляем
+            iframe.src = src;
         }
     }
 }
-
-    }
 
 function closeModal(id) {
     const modal = document.getElementById(id);
@@ -91,23 +76,7 @@ function closeModal(id) {
     modal.setAttribute('aria-hidden', 'true');
 
     const video = modal.querySelector('video');
-    if (video) {
-        video.pause();
-        video.currentTime = 0;
-    }
 
-    if (!document.querySelector('.modal.is-open')) {
-        document.body.style.overflow = '';
-    }
-
-    function closeModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-
-    const video = modal.querySelector('video');
     if (video) {
         video.pause();
         video.currentTime = 0;
@@ -116,14 +85,15 @@ function closeModal(id) {
     // === ОЧИСТКА КАРТЫ ===
     if (id === 'map-modal') {
         const iframe = document.getElementById('map-frame');
-        if (iframe) iframe.src = '';
+
+        if (iframe) {
+            iframe.src = '';
+        }
     }
 
     if (!document.querySelector('.modal.is-open')) {
         document.body.style.overflow = '';
     }
-}
-
 }
 
 
@@ -214,18 +184,133 @@ setupToggleCards('.faq [data-toggle-card]');
 const consultForm = document.querySelector('.consult-form');
 
 if (consultForm) {
-    consultForm.addEventListener('submit', () => {
+
+    let lastSubmitTime = 0;
+    let lastPayload = '';
+    let formOpenedAt = Date.now();
+
+    function isGarbageText(text) {
+
+        const clean = text
+            .toLowerCase()
+            .replace(/\s/g, '');
+
+        const repeatedPattern = /(.)\1{4,}/i;
+
+        if (repeatedPattern.test(clean)) {
+            return true;
+        }
+
+        const uniqueChars = new Set(clean).size;
+
+        if (clean.length > 10 && uniqueChars < 4) {
+            return true;
+        }
+
+        const hasVowels = /[aeiouаеёиоуыэюя]/i.test(clean);
+
+        if (clean.length > 6 && !hasVowels) {
+            return true;
+        }
+
+        return false;
+    }
+
+    consultForm.addEventListener('submit', (e) => {
+
+        // ===== HTML VALIDATION =====
+
         if (!consultForm.checkValidity()) {
+
+            e.preventDefault();
             consultForm.reportValidity();
+
             return;
         }
 
+        // ===== ANTISPAM TIME =====
+
+        const now = Date.now();
+
+        if (now - lastSubmitTime < 10000) {
+
+            e.preventDefault();
+
+            alert('Подождите немного перед повторной отправкой.');
+
+            return;
+        }
+
+        // ===== TOO FAST =====
+
+        const timeSpent = Date.now() - formOpenedAt;
+
+        if (timeSpent < 3000) {
+
+            e.preventDefault();
+
+            return;
+        }
+
+        // ===== HONEYPOT =====
+
+        const honeypot =
+            consultForm.querySelector('[name="website"]');
+
+        if (honeypot && honeypot.value.trim() !== '') {
+
+            e.preventDefault();
+
+            return;
+        }
+
+        // ===== GARBAGE TEXT =====
+
+        const message =
+            consultForm.querySelector('textarea[name="comment"]');
+
+        if (message && isGarbageText(message.value)) {
+
+            e.preventDefault();
+
+            alert('Введите корректные данные.');
+
+            return;
+        }
+
+        // ===== DUPLICATE PAYLOAD =====
+
+        const data = new FormData(consultForm);
+
+        const payload =
+            JSON.stringify(Object.fromEntries(data));
+
+        if (payload === lastPayload) {
+
+            e.preventDefault();
+
+            return;
+        }
+
+        lastPayload = payload;
+        lastSubmitTime = now;
+
+        // ===== SUCCESS =====
+
         setTimeout(() => {
+
             closeModal('consult-modal');
+
             consultForm.reset();
+
+            formOpenedAt = Date.now();
+
         }, 300);
+
     });
+
 }
+
 
 
 // ===== QUALIFICATION EXPAND =====
@@ -458,159 +543,12 @@ if (footerMapTrigger) {
 
 }
 
-// ===== ORPHANS FIX =====
-function fixOrphans(root = document.body) {
-    const wordsToGlue = ['в','и','к','с','у','о','а','из','за','на','по','для','от','до'];
-
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-
-    let node;
-    while (node = walker.nextNode()) {
-        let text = node.nodeValue;
-
-        wordsToGlue.forEach(word => {
-            const regex = new RegExp(`\\s(${word})\\s`, 'gi');
-            text = text.replace(regex, ` $1\u00A0`);
-        });
-
-        node.nodeValue = text;
-    }
-}
-
-
-let lastSubmitTime = 0;
-
-if (consultForm) {
-    consultForm.addEventListener('submit', (e) => {
-
-        const now = Date.now();
-
-        if (now - lastSubmitTime < 10000) {
-            e.preventDefault();
-            alert('Подождите немного перед отправкой новой формы');
-            return;
-        }
-
-        if (!consultForm.checkValidity()) {
-            e.preventDefault();
-            consultForm.reportValidity();
-            return;
-        }
-
-        lastSubmitTime = now;
-    });
-}
-
-consultForm.addEventListener('submit', (e) => {
-    const honeypot = consultForm.querySelector('[name="website"]');
-
-    if (honeypot && honeypot.value.trim() !== '') {
-        e.preventDefault();
-        return;
-    }
-});
-
-let formOpenedAt = Date.now();
-
-consultForm.addEventListener('submit', (e) => {
-    const timeSpent = Date.now() - formOpenedAt;
-
-    if (timeSpent < 3000) {
-        e.preventDefault();
-        return;
-    }
-});
-
-let lastPayload = '';
-
-consultForm.addEventListener('submit', (e) => {
-    const data = new FormData(consultForm);
-    const payload = JSON.stringify(Object.fromEntries(data));
-
-    if (payload === lastPayload) {
-        e.preventDefault();
-        return;
-    }
-
-    lastPayload = payload;
-});
-
-function isGarbageText(text) {
-    const clean = text
-        .toLowerCase()
-        .replace(/\s/g, '');
-
-    // 1. слишком длинная последовательность одинаковых/похожих букв
-    const repeatedPattern = /(.)\1{4,}/i;
-    if (repeatedPattern.test(clean)) return true;
-
-    // 2. слишком низкое разнообразие символов
-    const uniqueChars = new Set(clean).size;
-    if (clean.length > 10 && uniqueChars < 4) return true;
-
-    // 3. нет гласных (для кириллицы/латиницы)
-    const hasVowels = /[aeiouаеёиоуыэюя]/i.test(clean);
-    if (clean.length > 6 && !hasVowels) return true;
-
-    return false;
-}
-
-consultForm.addEventListener('submit', (e) => {
-    if (!consultForm.checkValidity()) {
-        consultForm.reportValidity();
-        return;
-    }
-
-    const message = consultForm.querySelector('textarea[name="comment"]');
-
-    if (message && isGarbageText(message.value)) {
-        e.preventDefault();
-
-        alert('Введите корректные данные.');
-        return;
-    }
-
-    setTimeout(() => {
-        closeModal('consult-modal');
-        consultForm.reset();
-    }, 300);
-});
-
-const phone = consultForm.querySelector('input[name="phone"]');
-
 function isValidPhone(value) {
     const v = value.trim();
 
     return /^[\d\s()+-]{7,20}$/.test(v);
 }
 
-document.querySelectorAll('.consent-row').forEach(row => {
-
-    const checkbox = row.querySelector('input[type="checkbox"]');
-
-    row.addEventListener('click', function(e) {
-
-        // ссылку НЕ трогаем
-        if (e.target.closest('a')) {
-            return;
-        }
-
-        // если клик был не по самому checkbox
-        if (e.target !== checkbox) {
-
-            e.preventDefault();
-
-            checkbox.checked = !checkbox.checked;
-
-            // триггер change на всякий случай
-            checkbox.dispatchEvent(new Event('change', {
-                bubbles: true
-            }));
-        }
-
-    });
-
-});
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===== CLOSE ALL MODALS SAFETY =====
@@ -626,20 +564,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== OPTIONAL: enforce one modal at a time =====
     window.closeAllModals = closeAllModals;
-
-    // ===== CHECKBOX FIX =====
-    document.querySelectorAll('.consent-row').forEach(row => {
-        const checkbox = row.querySelector('input[type="checkbox"]');
-        if (!checkbox) return;
-
-        row.addEventListener('click', (e) => {
-            if (e.target.closest('a')) return;
-
-            if (e.target !== checkbox) {
-                checkbox.checked = !checkbox.checked;
-                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-        });
-    });
 
 });
