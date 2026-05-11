@@ -4,6 +4,20 @@
     box-sizing: border-box;
 }
 
+.modal,
+.modal * {
+    -webkit-overflow-scrolling: touch;
+}
+
+input,
+label {
+    touch-action: manipulation;
+}
+
+* {
+    outline: 1px solid red;
+}
+
 html {
     -webkit-text-size-adjust: 100%;
 }
@@ -1273,7 +1287,7 @@ textarea {
         gap: 10px !important;
 
         flex: 1 !important;
-        overflow-y: auto !important;
+        overflow-y: visible !important;
     }
 
     .consult-form input,
@@ -1297,7 +1311,7 @@ textarea {
 #intro-modal .modal__panel--video {
     max-width: none !important;
     width: min(95vw, 900px) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     border-radius: 5px !important;
     
 }
@@ -2026,7 +2040,71 @@ textarea {
         margin-left: 20px !important;
         margin-right: 20px !important;
     }
+.consult-form input,
+    .consult-form textarea {
+        font-size: 16px !important;
+        padding: 14px !important;
+        border-radius: 8px !important;
+    }
 
+    .consult-form textarea {
+        min-height: 180px !important;
+    }
+
+    .consult-form .btn--submit {
+        font-size: 16px !important;
+        padding: 16px !important;
+    }
+
+        .modal__panel {
+        width: min(900px, 80vw) !important;
+        max-width: 900px !important;
+        max-height: 90vh !important;
+
+        padding: 40px 36px !important;
+        border-radius: 10px !important;
+    }
+
+    .modal__title {
+        font-size: 28px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .modal__lead {
+        font-size: 16px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .modal__section {
+        font-size: 18px !important;
+        margin: 18px 0 10px !important;
+    }
+
+    .consult-modal {
+        width: 860px !important;
+        max-width: 860px !important;
+        height: 1000px !important;
+        padding: 28px 24px !important;
+    }
+
+    .consult-form input,
+    .consult-form textarea {
+        font-size: 16px !important;
+        padding: 14px 16px !important;
+        border-radius: 8px !important;
+    }
+
+    .consult-form textarea {
+        min-height: 160px !important;
+    }
+
+    .btn--submit {
+        width: 180px !important;
+        min-width: 180px !important;
+        height: 60px !important;
+        font-size: 20px !important;
+        padding: 14px 18px !important;
+    }
     .footer__links li {
         font-size: 18px !important;
         margin-bottom: 10px !important;
@@ -2092,71 +2170,7 @@ textarea {
         margin-top: 13px !important;
     }
 
-    .consult-form input,
-    .consult-form textarea {
-        font-size: 16px !important;
-        padding: 14px !important;
-        border-radius: 8px !important;
-    }
-
-    .consult-form textarea {
-        min-height: 180px !important;
-    }
-
-    .consult-form .btn--submit {
-        font-size: 16px !important;
-        padding: 16px !important;
-    }
-
-        .modal__panel {
-        width: min(900px, 80vw) !important;
-        max-width: 900px !important;
-        max-height: 90vh !important;
-
-        padding: 40px 36px !important;
-        border-radius: 10px !important;
-    }
-
-    .modal__title {
-        font-size: 28px !important;
-        margin-bottom: 16px !important;
-    }
-
-    .modal__lead {
-        font-size: 16px !important;
-        margin-bottom: 20px !important;
-    }
-
-    .modal__section {
-        font-size: 18px !important;
-        margin: 18px 0 10px !important;
-    }
-
-    .consult-modal {
-        width: 860px !important;
-        max-width: 860px !important;
-        height: 1000px !important;
-        padding: 28px 24px !important;
-    }
-
-    .consult-form input,
-    .consult-form textarea {
-        font-size: 16px !important;
-        padding: 14px 16px !important;
-        border-radius: 8px !important;
-    }
-
-    .consult-form textarea {
-        min-height: 160px !important;
-    }
-
-    .btn--submit {
-        width: 180px !important;
-        min-width: 180px !important;
-        height: 60px !important;
-        font-size: 20px !important;
-        padding: 14px 18px !important;
-    }
+    
 
     #intro-modal .modal__panel--video {
         width: min(1000px, 85vw) !important;
@@ -3423,7 +3437,8 @@ li {
 }
 
 .consult-form {
-    display: grid;
+        display: flex;
+    flex-direction: column;
     gap: 5px;
 }
 
@@ -3462,6 +3477,16 @@ li {
     z-index: 5;
     cursor: pointer;
     flex-shrink: 0;
+    margin: 0 !important;
+}
+
+.consult-form input:not([type="checkbox"]),
+.consult-form textarea {
+    width: 100%;
+    border: 2px solid #111;
+    border-radius: 6px;
+    padding: 10px 10px;
+    font-size: 12px;
 }
 
 .consent-row label {
