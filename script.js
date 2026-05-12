@@ -5,6 +5,25 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
+window.addEventListener('scroll', () => {
+    closeAllToggles();
+});
+
+document.addEventListener('click', (e) => {
+    const isInside = e.target.closest('[data-toggle-card]');
+    const isTrigger = e.target.closest('[data-toggle-trigger]');
+
+    if (!isInside && !isTrigger) {
+        closeAllToggles();
+    }
+});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        closeAllToggles();
+    }
+});
+
 
 // ===== DETECT DESKTOP =====
 const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
@@ -49,6 +68,8 @@ function openModal(id) {
 
     if (video) {
         video.currentTime = 0;
+        video.muted = false;
+        video.volume = 1;
         video.play().catch(() => {});
     }
 
@@ -139,6 +160,16 @@ window.addEventListener('keydown', (e) => {
 
 
 // ===== TOGGLE CARDS (MOBILE CLICK / DESKTOP HOVER) =====
+
+function closeAllToggles() {
+    document.querySelectorAll('[data-toggle-card].is-open')
+        .forEach(card => {
+            card.classList.remove('is-open');
+            card.querySelector('[data-toggle-trigger]')
+                ?.setAttribute('aria-expanded', 'false');
+        });
+}
+
 function setupToggleCards(selector) {
     const cards = document.querySelectorAll(selector);
 
@@ -155,11 +186,13 @@ function setupToggleCards(selector) {
                     c.querySelector('[data-toggle-trigger]')
                         ?.setAttribute('aria-expanded', 'false');
                 });
-
-                if (!isOpen) {
-                    card.classList.add('is-open');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
+if (isOpen) {
+    closeAllToggles();
+} else {
+    closeAllToggles();
+    card.classList.add('is-open');
+    trigger.setAttribute('aria-expanded', 'true');
+}
             });
         } else {
 trigger.addEventListener('mouseenter', () => {
@@ -565,4 +598,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== OPTIONAL: enforce one modal at a time =====
     window.closeAllModals = closeAllModals;
 
+});
+
+const cookieBanner = document.getElementById('cookie-consent');
+const accept = document.getElementById('cookie-accept');
+const decline = document.getElementById('cookie-decline');
+
+if (localStorage.getItem('cookieConsent')) {
+  cookieBanner.style.display = 'none';
+}
+
+function hideCookie() {
+  cookieBanner.style.display = 'none';
+  localStorage.setItem('cookieConsent', 'true');
+}
+
+accept.addEventListener('click', hideCookie);
+decline.addEventListener('click', hideCookie);
+
+function fixTypography(node) {
+
+    if (node.nodeType === Node.TEXT_NODE) {
+
+        node.textContent = node.textContent.replace(
+            /(\s|^)([А-Яа-яA-Za-z]{1,2})\s+/g,
+            '$1$2\u00A0'
+        );
+
+        return;
+    }
+
+    if (
+        node.nodeType === Node.ELEMENT_NODE &&
+        !['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(node.tagName)
+    ) {
+
+        node.childNodes.forEach(fixTypography);
+
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fixTypography(document.body);
 });

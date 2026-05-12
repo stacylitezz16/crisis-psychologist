@@ -63,9 +63,9 @@
                 </div>
             </header>
             <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
-                <a href="#formats">Услуги</a>
-                <a href="#price">Стоимость</a>
-                <a href="#contacts">Контакты</a>
+                <a href="#formats"><b>Услуги</b></a>
+                <a href="#price"><b>Стоимость</b></a>
+                <a href="#contacts"><b>Контакты</b></a>
             </nav>
             <button class="qualification-tab" id="qualification-open" aria-label="Открыть квалификацию">
                     <picture>
@@ -490,7 +490,7 @@
         <div class="modal__overlay" data-close="intro-modal"></div>
         <div class="modal__panel modal__panel--video">
             <div class="video-card">
-                <video muted playsinline controls preload="auto">
+                <video playsinline controls preload="metadata">
                 <source src="source/IMG_1676.webm" type="video/webm">
                 <source src="source/IMG_1676.mp4" type="video/mp4">
                 <source src="source/IMG_1676.mov" type="video/mov">
@@ -640,6 +640,25 @@ lightbox.addEventListener('click', () => {
     lightboxImg.src = '';
 });
 </script>
+
+<div class="cookie-consent" id="cookie-consent">
+  <p class="cookie-consent__text">
+    Мы используем
+    <a href="source/Politika_konfidentsialnosti_2026.pdf" target="_blank" class="cookie-consent__link">
+      <b>cookies</b>
+    </a>
+    🍪, чтобы сайт работал корректно, запоминал ваши настройки и улучшал пользовательский опыт.
+  </p>
+
+  <div class="cookie-consent__actions">
+    <button class="cookie-consent__btn cookie-consent__btn--accept" id="cookie-accept">
+      Принять все
+    </button>
+    <button class="cookie-consent__btn cookie-consent__btn--decline" id="cookie-decline">
+      Отклонить
+    </button>
+  </div>
+</div>
 
     <script src="script.js"></script>
 </body>
