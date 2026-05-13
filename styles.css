@@ -13,23 +13,34 @@
 .consent-row::before {
     content: "";
     flex-shrink: 0;
-    width: 14px;
-    height: 14px;
-    border: 2px solid black;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
     border-radius: 4px;
     background-color: white;
     margin-left: 4px;
+    transform: translateY(-6px);
 }
 
 /* Галочка при checked */
 .consent-row input[type="checkbox"]:checked + .consent-text::after {
     content: "✓";
     color: black;
-    font-weight: bold;
     position: absolute;
-    left: 5px;
-    top: -2px;
-    font-size: 14px;
+    left: 7px;
+    top: -8px;
+    font-size: 20px;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+    overscroll-behavior: none !important;
 }
 
 *,
@@ -38,12 +49,13 @@
     box-sizing: border-box;
 }
 
-.consent-text {
-    pointer-events: none;
-}
-
 * {
     -webkit-tap-highlight-color: transparent;
+}
+
+
+.consent-text {
+    pointer-events: none;
 }
 
 .consent-row {
@@ -347,10 +359,6 @@ textarea {
 
     .help__cards {
         margin-left: 30px !important;
-    }
-
-    .info-block__cta {
-        transform: translateX(-10px) !important;
     }
 
         .map-popup {
@@ -879,13 +887,20 @@ textarea {
     }
 
     .consent-row::before {
-    width: 16px;
-    height: 16px;
+    width: 23px;
+    height: 23px;
+    transform: translateY(-3px);
+}
+
+.consent-text {
+    transform: translateX(10px);
 }
 
 /* Галочка при checked */
 .consent-row input[type="checkbox"]:checked + .consent-text::after {
-    font-size: 16px;
+    font-size: 23px;
+    left: -35px;
+    top: -5px;
 }
 
     .btn--cta {
@@ -1665,7 +1680,7 @@ textarea {
     }
 
     .hero__bg {
-        background-image: url('img/hero-PC.jpg') !important;
+        background-image: url('img/hero-PC.webp') !important;
         background-size: cover !important;
         background-position: center !important;
     }
@@ -1914,6 +1929,11 @@ textarea {
 
 .hero__actions .btn--cta:hover {
     text-decoration: underline !important;
+    transform: translateX(0) !important;
+}
+
+.hero__actions .btn--cta {
+    transform: translateX(0) !important;
 }
 
     /* БЛОК С ТЕКСТОМ */
@@ -2473,8 +2493,8 @@ textarea {
 }
 
   .consent-row input[type="checkbox"] {
-        width: 20px !important;
-        height: 20px !important;
+        width: 30px !important;
+        height: 30px !important;
         margin: 0 !important;
         cursor: pointer;
     }
@@ -2482,11 +2502,18 @@ textarea {
     .consent-row::before {
     width: 20px;
     height: 20px;
+    transform: translateY(-1px);
 }
 
 /* Галочка при checked */
 .consent-row input[type="checkbox"]:checked + .consent-text::after {
-    font-size: 18px;
+    font-size: 23px;
+    left: -44px !important;
+    top: -7px !important;
+}
+
+.consent-text {
+    transform: translateX(15px) !important;
 }
 }
 
@@ -2697,7 +2724,7 @@ li {
 .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('img/bg.jpg');
+    background-image: url('img/bg.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -3052,7 +3079,12 @@ body.is-loaded .hero__image {
 .about__text p {
     font-size: 9px;
     line-height: 1.2;
-    margin-bottom: 8px;
+    margin-bottom: 8.5px;
+    letter-spacing: 0;
+}
+
+.about__text p:last-child {
+    margin-bottom: 0;
 }
 
 .about__media {
@@ -3230,12 +3262,14 @@ body.is-loaded .hero__image {
     font-family: "Inter", sans-serif;
     font-size: 10px;
     font-weight: 600 !important;
+    margin-bottom: 5px;
 }
 
 .info-block h3 {
-    margin-top: 0;
+    margin-top: 10px;
     font-size: 10px;
     font-weight: 600 !important;
+    margin-bottom: 5px;
 }
 
 .info-block__text {
@@ -3267,7 +3301,7 @@ body.is-loaded .hero__image {
     align-items: center;
     justify-content: flex-end;
     align-self: center;
-    padding-right: 40px;
+    padding-right: 50px;
 
 }
 
@@ -3550,6 +3584,8 @@ body.is-loaded .hero__image {
     background: rgba(0, 0, 0, .70);
     opacity: 0;
     transition: opacity 0.3s ease;
+    width: 100%;
+    height: 100%;
 }
 
 .modal.is-open .modal__overlay {
@@ -4211,7 +4247,7 @@ body.is-loaded .hero__image {
 .methods-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 8px;
+    gap: 15px 15px;
 }
 
 .method-item {

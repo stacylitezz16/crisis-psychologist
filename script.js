@@ -62,7 +62,7 @@ function openModal(id) {
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
 
     const video = modal.querySelector('video');
 
@@ -113,7 +113,7 @@ function closeModal(id) {
     }
 
     if (!document.querySelector('.modal.is-open')) {
-        document.body.style.overflow = '';
+        document.body.classList.remove('modal-open');
     }
 }
 
