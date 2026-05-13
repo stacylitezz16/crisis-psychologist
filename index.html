@@ -17,9 +17,6 @@
 <meta property="og:image" content="favicon.svg" />
 <meta property="og:url" content="https://svetlanatabakova.ru" />
 <link rel="canonical" href="https://svetlanatabakova.ru" />
-<link rel="preload" as="image" href="img/hero-PC.webp" media="(min-width: 1024px)">
-<link rel="preload" as="image" href="img/hero-tablet.webp" media="(min-width: 768px) and (max-width: 1023px)">
-<link rel="preload" as="image" href="img/bg.webp" media="(max-width: 767px)">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Светлана Табакова — кризисный психолог">
@@ -30,9 +27,6 @@
     <link rel="icon" href="favicon.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Unbounded:wght@600;700&display=swap"
-        rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 
 <script type="application/ld+json">
@@ -524,9 +518,7 @@
         <div class="modal__panel modal__panel--video">
             <div class="video-card">
                 <video playsinline controls preload="metadata">
-                <source src="source/IMG_1676.webm" type="video/webm">
                 <source src="source/IMG_1676.mp4" type="video/mp4">
-                <source src="source/IMG_1676.mov" type="video/mov">
                 </video>
             </div>
         </div>
@@ -693,7 +685,7 @@ lightbox.addEventListener('click', () => {
   </div>
 </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
