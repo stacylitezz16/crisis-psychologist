@@ -639,9 +639,3 @@ function fixTypography(node) {
 document.addEventListener('DOMContentLoaded', () => {
     fixTypography(document.body);
 });
-
-requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-        document.body.classList.add('is-loaded');
-    });
-});

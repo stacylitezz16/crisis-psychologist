@@ -2994,6 +2994,7 @@ body.is-loaded .hero__bg {
 body.is-loaded .hero__image {
     opacity: 1;
     transform: translateY(0);
+    transition-delay: 0s;
 }
 
 .hero__title {
