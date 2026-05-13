@@ -807,7 +807,7 @@ textarea {
     .hero__bg {
         position: absolute;
         inset: 0;
-        background-image: url('img/hero-tablet.jpg') !important;
+        background-image: url('img/hero-tablet.webp') !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
