@@ -17,9 +17,9 @@
 <meta property="og:image" content="favicon.svg" />
 <meta property="og:url" content="https://svetlanatabakova.ru" />
 <link rel="canonical" href="https://svetlanatabakova.ru" />
-<link rel="preload" as="image" href="img/hero-bg.webp">
-<link rel="preload" as="image" href="img/hero-PC.webp">
-<link rel="preload" as="image" href="img/hero-tablet.webp">
+<link rel="preload" as="image" href="img/hero-PC.webp" media="(min-width: 1024px)">
+<link rel="preload" as="image" href="img/hero-tablet.webp" media="(min-width: 768px) and (max-width: 1023px)">
+<link rel="preload" as="image" href="img/bg.webp" media="(max-width: 767px)">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Светлана Табакова — кризисный психолог">
@@ -68,7 +68,7 @@
         "addressLocality": "Санкт-Петербург",
         "addressCountry": "RU"
       },
-      "priceRange": "4000–6500 RUB",
+      "priceRange": "4000–6500 RUB"
     }
   ]
 }
@@ -79,7 +79,9 @@
 <body>
     <main class="page">
         <section class="hero" id="top">
-            <div class="hero__bg" aria-hidden="true"></div>
+
+            <div class="hero__bg" aria-hidden="true">
+            </div>
             <header class="hero__topbar">
                 <div class="hero__city" id="footer-map-trigger"> <img src="img/icons/map.svg"> г. Санкт-Петербург</div>
                 <nav class="hero__nav">

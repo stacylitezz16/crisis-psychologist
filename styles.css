@@ -2988,13 +2988,12 @@ body.is-loaded .hero__bg {
 .hero__image {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
 }
 
 body.is-loaded .hero__image {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.4s !important;
 }
 
 .hero__title {

@@ -1,8 +1,6 @@
 // ===== HERO LOAD =====
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.body.classList.add('is-loaded');
-    }, 100);
+    document.body.classList.add('is-loaded');
 });
 
 window.addEventListener('scroll', () => {
@@ -640,4 +638,10 @@ function fixTypography(node) {
 
 document.addEventListener('DOMContentLoaded', () => {
     fixTypography(document.body);
+});
+
+requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        document.body.classList.add('is-loaded');
+    });
 });
