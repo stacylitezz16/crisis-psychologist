@@ -21,6 +21,11 @@
 <link rel="preload" as="image" href="img/hero-PC.webp">
 <link rel="preload" as="image" href="img/hero-tablet.webp">
 
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Светлана Табакова — кризисный психолог">
+<meta name="twitter:description" content="Онлайн и очно в СПб. Помогаю справиться с тревогой, травмой и сложными жизненными ситуациями.">
+<meta name="twitter:image" content="favicon.svg">
+
 <meta name="robots" content="index, follow" />
     <link rel="icon" href="favicon.svg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,19 +35,42 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 
-    <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Светлана Табакова",
-  "jobTitle": "Кризисный психолог",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Санкт-Петербург",
-    "addressCountry": "RU"
-  },
-  "email": "lana.tabakova@gmail.com",
-  "url": "https://svetlanatabakova.ru"
+  "@graph": [
+    {
+      "@type": "Psychologist",
+      "@id": "https://svetlanatabakova.ru/#psychologist",
+      "name": "Светлана Табакова",
+      "jobTitle": "Кризисный психолог",
+      "url": "https://svetlanatabakova.ru",
+      "email": "mailto:lana.tabakova@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      },
+      "areaServed": "RU",
+      "priceRange": "4000–6500 RUB",
+      "sameAs": [
+        "https://t.me/TabakovaSvetlana"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://svetlanatabakova.ru/#business",
+      "name": "Светлана Табакова — кризисный психолог",
+      "url": "https://svetlanatabakova.ru",
+      "telephone": "+79110010102",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      },
+      "priceRange": "4000–6500 RUB",
+    }
+  ]
 }
 </script>
 
