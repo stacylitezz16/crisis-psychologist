@@ -1,31 +1,36 @@
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+    src: url('/fonts/Inter/static/Inter-Regular.woff2') format('woff2'),
+         url('/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
     font-weight: 400;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-Medium.ttf') format('truetype');
+    src: url('/fonts/Inter/static/Inter-Medium.woff2') format('woff2'),
+         url('/fonts/Inter/static/Inter-Medium.ttf') format('truetype');
     font-weight: 600;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+    src: url('/fonts/Inter/static/Inter-SemiBold.woff2') format('woff2'),
+         url('/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
     font-weight: 700;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Unbounded';
-    src: url('/fonts/Unbounded/static/Unbounded-SemiBold.ttf') format('truetype');
+    src: url('/fonts/Unbounded/static/Unbounded-SemiBold.woff2') format('woff2'),
+         url('/fonts/Unbounded/static/Unbounded-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
+
 
 
 
@@ -1327,7 +1332,7 @@ textarea {
     }
 
     .price__panel {
-        background-image: url("img/tablet-price-bg.jpg") !important;
+        background-image: url("img/tablet-price-bg.webp") !important;
     }
 
     #intro-open {
@@ -1509,8 +1514,6 @@ textarea {
   min-height: 100vh !important;
   width: 100% !important;
   overflow: hidden !important;
-
-  background: url('/img/your-image.jpg') center/cover no-repeat !important;
 }
 
   .error__content {
@@ -1919,7 +1922,7 @@ textarea {
 
     .help__stage {
         padding: 100px 20px !important;
-        background: url('img/PC-work.jpg') center/cover no-repeat !important;
+        background: url('img/PC-work.webp') center/cover no-repeat !important;
         border-radius: 10px !important;
     }
 
@@ -3350,7 +3353,7 @@ body.is-loaded .hero__image {
     padding-left: 0;
     padding-right: 0;
     color: #fff;
-    background: url('img/price-bg.jpg') center/cover no-repeat;
+    background: url('img/price-bg.webp') center/cover no-repeat;
     border-radius: 4px;
 }
 
@@ -3959,7 +3962,7 @@ body.is-loaded .hero__image {
     z-index: 1;
     overflow: visible;
     padding: 14px 6px 10px;
-    background: url('img/work-bg.jpg') center/cover no-repeat;
+    background: url('img/work-bg.webp') center/cover no-repeat;
     border-radius: 4px;
 }
 
