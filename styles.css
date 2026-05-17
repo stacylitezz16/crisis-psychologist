@@ -3544,7 +3544,7 @@ body.is-loaded .hero__image {
     top: 90px;
     width: 130px;
     height: 200px;
-    background: url('img/icons/woman.svg') no-repeat center / contain;
+    background: url('img/icons/woman.png') no-repeat center / contain;
     pointer-events: none;
 
 }
