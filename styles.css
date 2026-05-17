@@ -3557,7 +3557,7 @@ body.is-loaded .hero__image {
     width: 170px;
     height: 200px;
 
-    background: url('img/icons/column.svg') no-repeat center / contain;
+    background: url('img/icons/column.png') no-repeat center / contain;
     pointer-events: none;
 }
 
