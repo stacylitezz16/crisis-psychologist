@@ -32,7 +32,37 @@
 }
 
 
+.error-page {
+    position: relative;
+    width: 100%;
+}
 
+.page-404,
+.error-page {
+    height: 100vh;
+}
+
+.error-page picture,
+.error-page img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.error-page__click {
+    position: absolute;
+
+    width: 190px;
+    height: 30px;
+
+    left: 33%;
+    bottom: 51%;
+
+    transform: translateX(-50%);
+
+    /* чисто для проверки */
+    /* background: rgba(255,0,0,.3); */
+}
 
 
 /* Скрываем настоящий чекбокс */
@@ -631,100 +661,6 @@ textarea {
     --fw-body-bold: 600;
 }
 
-.page-404 {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-.page-404__bg {
-    position: absolute;
-    inset: 0;
-    background: url('img/error-404/mob-404.jpg') center/cover no-repeat;
-    z-index: 0;
-}
-
-.page-404__content {
-    position: relative;
-    z-index: 2;
-    margin-top: 70px;
-    margin-left: 20px;
-    max-width: 320px;
-     padding: 160px 20px 20px 20px;
-}
-
-/* тексты */
-.page-404__text-main {
-    font-size: 20px;
-    font-family: "Unbounded";
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: white;
-    white-space: nowrap;
-
-}
-
-.page-404__text-sub {
-    font-size: 10px;
-    font-family: "Inter";
-    line-height: 1.7;
-    font-weight: 600;
-    opacity: 0.9;
-    color: white;
-    white-space: nowrap;
-    font-weight: 600;
-
-}
-
-/* кнопка */
-.page-404__button {
-    margin-top: 5px;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 7px 8px;
-
-    background: white;
-    color: #111;
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    border-radius: 4px;
-    text-decoration: none;
-
-    font-family: "Inter", sans-serif;
-
-    transition: box-shadow .2s ease, transform .2s ease;
-}
-
-.page-404__button:hover {
-    box-shadow: 0 12px 18px rgba(0, 0, 0, .32);
-    transform: translateY(-1px);
-}
-
-/* стрелка */
-.page-404__arrow {
-    width: 15px;
-    height: auto;
-}
-
-.page-404__layer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
-    width: 90%;
-    max-width: 820px;
-
-    z-index: 2;
-    pointer-events: none;
-}
-
 * {
     box-sizing: border-box;
     
@@ -733,69 +669,23 @@ textarea {
 
 
 /* ===== TABLET ===== */
-@media (min-width: 768px) {
-    .page-404__bg {
-        background:
-            url("img/error-404/tablet-404.jpg") center/cover no-repeat !important;
-    }
-}
-
-/* ===== DESKTOP ===== */
-@media (min-width: 1024px) {
-    .page-404__bg {
-        background:
-            url("img/error-404/desk-404.jpg") center/cover no-repeat !important;
-    }
-}
 
 @media (min-width: 768px) and (max-width: 1023px) {
 
-    .page-404 {
-        max-width: none !important;
-    }
-    
-    .page-404__content {
-        margin-top: 120px;
-        padding-top: 220px;
-        max-width: 60%;
-        margin-left: 20px;
-    }
+.error-page__click {
+    position: absolute;
 
-    .page-404__code {
-        font-size: 160px;
-        top: 20px;
-        left: 160px;
-        visibility: hidden !important;
-    }
+    width: 320px;
+    height: 40px;
 
+    left: 24%;
+    bottom: 37%;
 
-    .page-404__content .page-404__text-main {
-        font-size: 32px !important;
-        line-height: 1.2;
-    }
+    transform: translateX(-50%);
 
-    .page-404__text-sub {
-        font-size: 15px;
-        max-width: 420px;
-        font-weight: 600;
-    }
-
-    .page-404__button {
-        font-size: 14px;
-        padding: 10px 22px;
-        min-width: 150px;
-    }
-
-    .page-404__layer {
-        width: 82%;
-        max-width: 490px;
-
-        right: 0px;
-        bottom: 0;
-
-        z-index: 2;
-        opacity: 0.95;
-    }
+    /* чисто для проверки */
+    /* background: rgba(255,0,0,.3); */
+}
 
     h3 {
         font-size: 18px !important;
@@ -1681,6 +1571,11 @@ textarea {
 
 @media (min-width: 1024px) {
 
+        .page-404__bg {
+        background: 
+        url("img/error-404/desk-404.jpg") center/cover no-repeat !important;
+    }
+
      .cookie-consent {
     width: calc(100% - 60px) !important;
     max-width: 1440px !important;
@@ -1749,6 +1644,21 @@ textarea {
     .title {
         font-size: 38px !important;
     }
+
+    .error-page__click {
+    position: absolute;
+
+    width: 420px;
+    height: 60px;
+
+    left: 20%;
+    bottom:4%;
+
+    transform: translateX(-50%);
+
+    /* чисто для проверки */
+    /* background: rgba(255,0,0,.3); */
+}
 
 .container {
     max-width: 1100px !important;
@@ -2564,16 +2474,6 @@ textarea {
      min-height: 100vh;
     }
 
-    .page-404__scene {
-    position: relative;
-
-    width: min(480px, 92vw);
-
-    aspect-ratio: 480 / 600;
-
-    overflow: hidden;
-}
-
         .page-404__content {
         max-width: 40%;
         margin-top: 55px;
@@ -2583,9 +2483,9 @@ textarea {
     }
 
         .page-404__layer {
-        width: 45%;
-        max-width: 520px;
-        right: 0px;
+        width: 92%;
+        max-width: 1020px;
+        right: -900px;
         bottom: 0;
     }
 
@@ -4079,91 +3979,6 @@ body.is-loaded .hero__image {
     margin: 6px auto 5px;
     padding: 10px 10px;
     font-size: 12px;
-}
-
-.error-page {
-    min-height: 100vh;
-    max-width: 720px;
-    margin: 0 auto;
-    background: #1f2023;
-    padding: 28px 24px 40px;
-    color: #fff;
-}
-
-.error-page__label {
-    margin: 0 0 20px;
-    color: rgba(255, 255, 255, .45);
-    font-size: 44px;
-    font-weight: 500;
-}
-
-.error-card {
-    position: relative;
-    min-height: 780px;
-    overflow: hidden;
-    border-radius: 0;
-    background: #2a2a2d;
-}
-
-.error-card__bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(35, 24, 16, .44), rgba(35, 24, 16, .44)), linear-gradient(120deg, #6f5947, #7a8b96);
-}
-
-.error-card__code {
-    position: relative;
-    z-index: 2;
-    margin: 30px 0 0;
-    text-align: center;
-    font-family: Unbounded, Inter, sans-serif;
-    font-size: 220px;
-    line-height: .86;
-    color: rgba(255, 255, 255, .35);
-}
-
-.error-card__content {
-    position: relative;
-    z-index: 3;
-    padding: 12px 34px;
-    max-width: 80%;
-}
-
-.error-card__content h2 {
-    margin: 0 0 8px;
-    font-size: 56px;
-    line-height: 1.03;
-    font-family: "Unbounded", sans-serif;
-}
-
-.error-card__content p {
-    color: rgba(255, 255, 255, .95);
-    font-size: 29px;
-    line-height: 1.3;
-}
-
-.error-card__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 14px;
-    text-decoration: none;
-    font-size: 38px;
-    padding: 14px 20px;
-}
-
-.error-card__btn span {
-    font-size: 44px;
-    line-height: 1;
-}
-
-.error-card__person {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 56%;
-    height: 55%;
-    background: linear-gradient(145deg, #cd8f63, #8b583d);
 }
 
 .qualification-expand {
