@@ -598,21 +598,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-const cookieBanner = document.getElementById('cookie-consent');
-const accept = document.getElementById('cookie-accept');
-const decline = document.getElementById('cookie-decline');
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieBanner = document.getElementById('cookie-consent');
+    const accept = document.getElementById('cookie-accept');
+    const decline = document.getElementById('cookie-decline');
 
-if (localStorage.getItem('cookieConsent')) {
-  cookieBanner.style.display = 'none';
-}
+    if (!cookieBanner || !accept || !decline) return;
 
-function hideCookie() {
-  cookieBanner.style.display = 'none';
-  localStorage.setItem('cookieConsent', 'true');
-}
+    const STORAGE_KEY = 'cookieConsent';
+    const EXPIRY_DAYS = 30; // через сколько дней снова показывать
 
-accept.addEventListener('click', hideCookie);
-decline.addEventListener('click', hideCookie);
+    function getConsent() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+
+        try {
+            return JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+
+    function saveConsent(status) {
+        const data = {
+            status,
+            date: Date.now()
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        cookieBanner.style.display = 'none';
+    }
+
+    function isExpired(date) {
+        const now = Date.now();
+        const diffDays = (now - date) / (1000 * 60 * 60 * 24);
+        return diffDays > EXPIRY_DAYS;
+    }
+
+    const consent = getConsent();
+
+    // если уже есть решение
+    if (consent) {
+        const expired = isExpired(consent.date);
+
+        // если не истёк срок — скрываем баннер
+        if (!expired) {
+            cookieBanner.style.display = 'none';
+
+            // сюда потом можно:
+            // if (consent.status === 'accepted') loadAnalytics();
+
+            return;
+        }
+
+        // если истёк — чистим и показываем снова
+        localStorage.removeItem(STORAGE_KEY);
+    }
+
+    accept.addEventListener('click', () => saveConsent('accepted'));
+    decline.addEventListener('click', () => saveConsent('declined'));
+});
 
 function fixTypography(node) {
 
