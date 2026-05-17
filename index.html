@@ -531,7 +531,7 @@
         <div class="modal__overlay" data-close="intro-modal"></div>
         <div class="modal__panel modal__panel--video">
             <div class="video-card">
-                <video playsinline controls preload="metadata">
+                <video playsinline controls preload="none">
                 <source src="source/IMG_1676.mp4" type="video/mp4">
                 </video>
             </div>
@@ -607,9 +607,23 @@
    <form class="consult-form"
       action="https://getform.io/f/0yii679jwx0"
       method="POST">
-
-    <input type="text" name="fi-sender-firstName" placeholder="Имя Фамилия" required />
-    <input type="tel" name="fi-sender-phone" placeholder="Телефон" required />
+<input 
+    type="text"
+    name="fi-sender-firstName"
+    placeholder="Имя Фамилия"
+    required
+    minlength="3"
+    pattern="^[А-Яа-яA-Za-zЁё\s-]+$"
+    title="Введите имя и фамилию буквами"
+/>
+<input 
+    type="tel"
+    name="fi-sender-phone"
+    placeholder="Телефон"
+    required
+    pattern="^\+[1-9]\d{10,14}$"
+    title="Введите номер в международном формате. Например: +79991234567"
+/>
     <input type="email" name="fi-sender-email" placeholder="E-mail" required />
     <textarea name="fi-text-message" placeholder="Можете оставить ваш комментарий"></textarea>
 
@@ -723,7 +737,44 @@ lightbox.addEventListener('click', () => {
   </div>
 </div>
 
+<script>
+const phoneInput = document.querySelector('input[name="fi-sender-phone"]');
+const nameInput = document.querySelector('input[name="fi-sender-firstName"]');
+
+phoneInput.addEventListener('invalid', () => {
+    phoneInput.setCustomValidity(
+        'Введите номер в формате +79991234567'
+    );
+});
+
+phoneInput.addEventListener('input', () => {
+    phoneInput.setCustomValidity('');
+});
+
+nameInput.addEventListener('invalid', () => {
+    nameInput.setCustomValidity(
+        'Введите имя и фамилию буквами'
+    );
+});
+
+nameInput.addEventListener('input', () => {
+    nameInput.setCustomValidity('');
+});
+</script>
+
+<script>
+window.addEventListener('load', () => {
+    const video = document.getElementById('intro-video');
+
+    setTimeout(() => {
+        video.preload = 'auto';
+        video.load();
+    }, 1500);
+});
+</script>
+
     <script src="script.js" defer></script>
+
 </body>
 
 </html>
