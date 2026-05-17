@@ -4359,11 +4359,10 @@ body.is-loaded .hero__image {
 }
 
 .method-item img {
-    width: 44px;
-    height: 38px;
-    object-fit: contain;
-    object-position: center;
+    width: 40px;
+    height: 40px;
     display: block;
+    object-fit: contain;
 }
 
 .method-item h3 {
