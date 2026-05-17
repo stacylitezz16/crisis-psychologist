@@ -2199,7 +2199,7 @@ textarea {
 
     .faq-btn {
         font-size: 18px !important;
-         width: min(600px, 100%) !important;
+         width: min(650px, 100%) !important;
          height: 50px !important;
         text-align: left !important;
         padding: 18px 20px !important;
@@ -2222,7 +2222,7 @@ textarea {
     }
 
     .faq-answer {
-        width: min(600px, 100%) !important;
+        width: min(650px, 100%) !important;
         margin: 0 auto !important;
         margin-top: 8px !important;
         box-sizing: border-box !important;
@@ -2231,11 +2231,11 @@ textarea {
     }
 
     .faq::before {
-    top: 20px !important;
-    right: clamp(10px, 5vw, 80px) !important;
-    height: 500px !important;
-    width: clamp(260px, 25vw, 600px) !important;
-    transform: translate(40%, 10%) !important;
+    top: -20px !important;
+    right: clamp(20px, 5vw, 90px) !important;
+    height: 600px !important;
+    width: clamp(420px, 25vw, 600px) !important;
+    transform: translate(5%, 10%) !important;
 }
 
     .faq::after {
@@ -2629,6 +2629,14 @@ textarea {
     .methods__lead {
         max-width: none !important;
     }
+
+    .faq::before {
+    top: 20px !important;
+    right: clamp(20px, 5vw, 90px) !important;
+    height: 600px !important;
+    width: clamp(300px, 25vw, 600px) !important;
+    transform: translate(5%, 10%) !important;
+}
 
     .methods-grid {
         margin-top: 70px !important;
@@ -4363,6 +4371,12 @@ body.is-loaded .hero__image {
     height: 40px;
     display: block;
     object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+
+img[src$=".svg"] {
+  image-rendering: crisp-edges;
 }
 
 .method-item h3 {
