@@ -408,11 +408,11 @@
                     <div class="price__group">
                         <p><strong>Индивидуальная работа:</strong></p>
                         <p>Очно и онлайн 55 мин. <b>4 000 ₽</b></p>
-                        <p>Очно и онлайн 1 час 45 мин. <b>6 000 ₽</b></p>
+                        <p> Очно и онлайн 1 час 25 мин. <b>6 000 ₽</b></p>
                     </div>
                     <div class="price__group-bottom">
                         <p><strong>Семейное (парное) психологическое консультирование:</strong></p>
-                        <p>Очно и онлайн 1 час 25 мин. <b>6 500 ₽</b></p>
+                        <p>Очно и онлайн 1 час 45 мин.<b>6 500 ₽</b></p>
                     </div>
                 </div>
                 <button class="btn btn--light btn--cta" data-open-consult>Записаться</button>
@@ -604,18 +604,17 @@
         <div class="modal__panel consult-modal">
             <h3 class="modal__title">Запись на консультацию</h3>
             <p class="modal__lead">Оставьте данные и я свяжусь с вами в ближайшее время.</p>
-            <form class="consult-form"
-      action="https://formsubmit.co/lana.tabakova@gmail.com"
+   <form class="consult-form"
+      action="https://getform.io/f/0yii679jwx0"
       method="POST">
 
-    <input type="text" name="full_name" placeholder="Имя Фамилия" required />
-    <input type="tel" name="phone" placeholder="Телефон" required />
-    <input type="email" name="email" placeholder="E-mail" required />
-    <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-    <textarea name="comment" placeholder="Можете оставить ваш комментарий"></textarea>
+    <input type="text" name="fi-sender-firstName" placeholder="Имя Фамилия" required />
+    <input type="tel" name="fi-sender-phone" placeholder="Телефон" required />
+    <input type="email" name="fi-sender-email" placeholder="E-mail" required />
+    <textarea name="fi-text-message" placeholder="Можете оставить ваш комментарий"></textarea>
 
 <label class="consent-row first-row">
-    <input type="checkbox" id="privacy" name="privacy" required />
+    <input type="checkbox" id="privacy" name="fi-consent-privacy" required />
     <span class="consent-text">
         Я согласен с
         <a href="source/Politika_konfidentsialnosti_2026.pdf" class="doc-link" target="_blank" rel="noopener">
@@ -625,7 +624,7 @@
 </label>
 
 <label class="consent-row">
-    <input type="checkbox" id="offer" name="offer" required />
+    <input type="checkbox" id="offer" name="fi-consent-offer" required />
     <span class="consent-text">
         Я принимаю условия
         <a href="source/Publichnaya_oferta_2026.pdf" class="doc-link" target="_blank" rel="noopener">
@@ -678,6 +677,31 @@ lightbox.addEventListener('click', () => {
     lightbox.classList.remove('is-open');
     lightboxImg.src = '';
 });
+</script>
+
+<script src="https://forminit.com/sdk/v1/forminit.js"></script>
+
+<script src="https://forminit.com/sdk/v1/forminit.js"></script>
+
+<script defer>
+  document.addEventListener("DOMContentLoaded", () => {
+    const forminit = new Forminit();
+    const FORM_ID = "0yii679jwx0";
+
+    const form = document.getElementById("contact-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      console.log("sending...");
+
+      const res = await forminit.submit(FORM_ID, formData);
+
+      console.log(res);
+    });
+  });
 </script>
 
 <div class="cookie-consent" id="cookie-consent">
