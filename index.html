@@ -15,7 +15,6 @@
 <meta property="og:description" content="Помогаю справиться с тревогой, травмой и сложными жизненными ситуациями. Онлайн и очно в СПб." />
 <meta property="og:type" content="website" />
 <link rel="icon" href="/favicon-new.svg" type="image/svg+xml">
-<link rel="alternate icon" href="/favicon-new.svg">
 <meta property="og:url" content="https://svetlanatabakova.ru" />
 <link rel="canonical" href="https://svetlanatabakova.ru" />
 
@@ -655,7 +654,7 @@
         <div class="modal__overlay" data-close="intro-modal"></div>
         <div class="modal__panel modal__panel--video">
             <div class="video-card">
-                <video playsinline controls preload="none">
+                <video id="intro-video" playsinline controls preload="none">
                 <source src="source/IMG_1676.mp4" type="video/mp4">
                 </video>
             </div>
@@ -801,23 +800,27 @@
     <img class="lightbox__img" id="lightbox-img" src="" alt="">
 </div>
 <script>
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
+document.addEventListener('DOMContentLoaded', () => {
 
-document.querySelectorAll('.diploma img').forEach(img => {
-    img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('is-open');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    if (!lightbox || !lightboxImg) return;
+
+    document.querySelectorAll('.diploma img').forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('is-open');
+        });
     });
-});
 
-lightbox.addEventListener('click', () => {
-    lightbox.classList.remove('is-open');
-    lightboxImg.src = '';
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+    });
+
 });
 </script>
-
-<script src="https://forminit.com/sdk/v1/forminit.js"></script>
 
 <script src="https://forminit.com/sdk/v1/forminit.js"></script>
 
@@ -830,7 +833,6 @@ lightbox.addEventListener('click', () => {
   document.addEventListener("DOMContentLoaded", () => {
     const forminit = new Forminit();
     const FORM_ID = "0yii679jwx0";
-
     const form = document.getElementById("contact-form");
 
     form.addEventListener("submit", async (e) => {
@@ -895,10 +897,14 @@ nameInput.addEventListener('input', () => {
 window.addEventListener('load', () => {
     const video = document.getElementById('intro-video');
 
-    setTimeout(() => {
+    if (!video) return;
+
+    const t = setTimeout(() => {
         video.preload = 'auto';
         video.load();
     }, 1500);
+
+    window.addEventListener('beforeunload', () => clearTimeout(t));
 });
 </script>
 
