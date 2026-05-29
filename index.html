@@ -35,35 +35,158 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Psychologist",
-      "@id": "https://svetlanatabakova.ru/#psychologist",
-      "name": "Светлана Табакова",
-      "jobTitle": "Кризисный психолог",
-      "url": "https://svetlanatabakova.ru",
-      "email": "mailto:lana.tabakova@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Санкт-Петербург",
-        "addressCountry": "RU"
-      },
-      "areaServed": "RU",
-      "priceRange": "4000–6500 RUB",
-      "sameAs": [
-        "https://t.me/TabakovaSvetlana"
-      ]
+      "@type": "WebSite",
+      "@id": "https://svetlanatabakova.ru/#website",
+      "url": "https://svetlanatabakova.ru/",
+      "name": "Светлана Табакова — кризисный психолог",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://svetlanatabakova.ru/#person"
+      }
     },
     {
-      "@type": "LocalBusiness",
-      "@id": "https://svetlanatabakova.ru/#business",
-      "name": "Светлана Табакова — кризисный психолог",
-      "url": "https://svetlanatabakova.ru",
+      "@type": "WebPage",
+      "@id": "https://svetlanatabakova.ru/#webpage",
+      "url": "https://svetlanatabakova.ru/",
+      "name": "Кризисный психолог в Санкт-Петербурге — Светлана Табакова",
+      "description": "Индивидуальные консультации психолога очно в Санкт-Петербурге, Думская 5/22, и онлайн.",
+      "isPartOf": {
+        "@id": "https://svetlanatabakova.ru/#website"
+      },
+      "about": {
+        "@id": "https://svetlanatabakova.ru/#business"
+      },
+      "inLanguage": "ru-RU"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://svetlanatabakova.ru/#person",
+      "name": "Светлана Табакова",
+      "jobTitle": "Кризисный психолог",
+      "url": "https://svetlanatabakova.ru/",
+      "email": "lana.tabakova@gmail.com",
       "telephone": "+79110010102",
+      "sameAs": [
+        "https://t.me/TabakovaSvetlana"
+      ],
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Думская 5/22",
+        "addressLocality": "Санкт-Петербург",
+        "addressCountry": "RU"
+      }
+    },
+    {
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": "https://svetlanatabakova.ru/#business",
+      "name": "Светлана Табакова — кризисный психолог",
+      "description": "Индивидуальные консультации психолога очно в Санкт-Петербурге и онлайн.",
+      "url": "https://svetlanatabakova.ru/",
+      "email": "lana.tabakova@gmail.com",
+      "telephone": "+79110010102",
+      "image": "https://svetlanatabakova.ru/img/og-image.jpg",
+      "priceRange": "4000-6500 RUB",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Думская 5/22",
         "addressLocality": "Санкт-Петербург",
         "addressCountry": "RU"
       },
-      "priceRange": "4000–6500 RUB"
+      "areaServed": {
+        "@type": "City",
+        "name": "Санкт-Петербург"
+      },
+      "founder": {
+        "@id": "https://svetlanatabakova.ru/#person"
+      },
+      "sameAs": [
+        "https://t.me/TabakovaSvetlana"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Консультации психолога",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Индивидуальная консультация психолога, 55 минут",
+            "price": "4000",
+            "priceCurrency": "RUB",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Индивидуальная консультация психолога очно или онлайн"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Индивидуальная консультация психолога, 1 час 25 минут",
+            "price": "6000",
+            "priceCurrency": "RUB",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Индивидуальная консультация психолога очно или онлайн"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Индивидуальная консультация психолога, 1 час 45 минут",
+            "price": "6500",
+            "priceCurrency": "RUB",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Индивидуальная консультация психолога очно или онлайн"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://svetlanatabakova.ru/#faq",
+      "isPartOf": {
+        "@id": "https://svetlanatabakova.ru/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Как понять, что нужна помощь психолога?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Сам факт того, что вы задаётесь этим вопросом, уже говорит о том, что стоит прислушаться к себе. Возможно, вы в чем-то застряли и это мешает вам жить."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как подготовиться к первой консультации?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Никакой специальной подготовки не требуется. По возможности сформулируйте, какой результат вы хотели бы получить от совместной работы, и обеспечьте себе спокойное, конфиденциальное место для сессии."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Если я сильный, разве я сам не справлюсь?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Справляться самому не всегда значит справляться эффективно и без потерь. Иногда самая сильная позиция - это позволить себе принять помощь и поддержку, чтобы идти дальше увереннее."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что делать, если я хочу начать, но всё откладываю?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Самый простой способ - сделать маленькое конкретное действие: записаться на одну диагностическую сессию. Это ни к чему не обязывает, но помогает сделать первый шаг."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Почему психолог не может гарантировать результат?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Психотерапия - это совместная работа. Специалист даёт инструменты, знания и безопасное пространство, а результат зависит от готовности применять эти инструменты, доверять процессу и быть честным с собой."
+          }
+        }
+      ]
     }
   ]
 }
@@ -78,7 +201,7 @@
             <div class="hero__bg" aria-hidden="true">
             </div>
             <header class="hero__topbar">
-                <div class="hero__city" id="footer-map-trigger"> <img src="img/icons/map.svg"> г. Санкт-Петербург</div>
+                <div class="hero__city" id="footer-map-trigger"><img src="img/icons/map.svg" alt="" aria-hidden="true"> г. Санкт-Петербург</div>
                 <nav class="hero__nav">
                     <a href="#formats">Услуги</a>
                     <a href="#price">Стоимость</a>
@@ -86,8 +209,8 @@
                 </nav>
                 <div class="hero__actions">
                     <button class="btn btn--link btn--cta" data-open-consult>Записаться</button>
-                    <button class="btn btn--icon" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav"><img
-                            src="img/icons/menu.svg"></button>
+                    <button class="btn btn--icon" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню"><img
+        src="img/icons/menu.svg" alt="" aria-hidden="true"></button>
                 </div>
             </header>
             <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
@@ -479,7 +602,7 @@
 
         <footer class="footer" id="contacts">
             <div class="footer__bg" aria-hidden="true">
-                <img src="img/footer-ph.webp" loading="lazy">
+                <img src="img/footer-ph.webp" alt="" aria-hidden="true" loading="lazy">
             </div>
 
             <ul class="footer__links">
@@ -660,14 +783,14 @@
         <div class="modal__overlay" data-close="doc-modal"></div>
 
         <div class="modal__panel">
-            <button class="modal__close" data-close="doc-modal">×</button>
+            <button class="modal__close" data-close="doc-modal" aria-label="Закрыть окно">×</button>
 
-            <iframe id="doc-frame" src="" width="100%" height="100%" style="border: none;"></iframe>
+            <iframe id="doc-frame" src="" width="100%" height="100%" style="border: none;" title="Документ"></iframe>
         </div>
     </div>
 <div class="modal modal--inline" id="map-modal" aria-hidden="true">
     <div class="modal__panel modal__panel--map">
-        <iframe id="map-frame" frameborder="0" allowfullscreen></iframe>
+       <iframe id="map-frame" frameborder="0" allowfullscreen title="Карта: Санкт-Петербург, Думская 5/22"></iframe>
     </div>
 </div>
 
@@ -697,6 +820,11 @@ lightbox.addEventListener('click', () => {
 <script src="https://forminit.com/sdk/v1/forminit.js"></script>
 
 <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+
+<script
+  src="https://example.com/forminit.js"
+  onerror="console.warn('forminit.js не загрузился, форма работает без него')">
+</script>
 
 <script defer>
   document.addEventListener("DOMContentLoaded", () => {

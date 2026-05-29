@@ -8,16 +8,16 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-Medium.woff2') format('woff2'),
-         url('/fonts/Inter/static/Inter-Medium.ttf') format('truetype');
+    src: url('/fonts/Inter/static/Inter24pt-Medium.woff2') format('woff2'),
+         url('/fonts/Inter/static/Inter_24pt-Medium.ttf') format('truetype');
     font-weight: 600;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Inter';
-    src: url('/fonts/Inter/static/Inter-SemiBold.woff2') format('woff2'),
-         url('/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+    src: url('/fonts/Inter/static/Inter24pt-SemiBold.woff2') format('woff2'),
+         url('/fonts/Inter/static/Inter_24pt-SemiBold.ttf') format('truetype');
     font-weight: 700;
     font-display: swap;
 }
@@ -1573,7 +1573,7 @@ textarea {
 
         .page-404__bg {
         background: 
-        url("img/error-404/desk-404.jpg") center/cover no-repeat !important;
+        url("img/error-404/desk404.jpg") center/cover no-repeat !important;
     }
 
      .cookie-consent {
@@ -3647,7 +3647,7 @@ body.is-loaded .hero__image {
     inset: 0;
 
     background: linear-gradient(rgba(0, 0, 0, .52), rgba(0, 0, 0, .52)),
-        url('assets/footer-bg.png') center/contain no-repeat;
+        url('img/footer-ph.webp') center/cover no-repeat;
 }
 
 .footer__bg img {
