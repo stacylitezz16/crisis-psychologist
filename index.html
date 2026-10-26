@@ -606,7 +606,7 @@
             <h3 class="modal__title">Запись на консультацию</h3>
             <p class="modal__lead">Оставьте данные и я свяжусь с вами в ближайшее время.</p>
    <form class="consult-form"
-      action="https://getform.io/f/0yii679jwx0"
+      action="https://formsubmit.co/lana.tabakova@gmail.com"
       method="POST">
 <input 
     type="text"
@@ -692,31 +692,6 @@ lightbox.addEventListener('click', () => {
     lightbox.classList.remove('is-open');
     lightboxImg.src = '';
 });
-</script>
-
-<script src="https://forminit.com/sdk/v1/forminit.js"></script>
-
-<script src="https://forminit.com/sdk/v1/forminit.js"></script>
-
-<script defer>
-  document.addEventListener("DOMContentLoaded", () => {
-    const forminit = new Forminit();
-    const FORM_ID = "0yii679jwx0";
-
-    const form = document.getElementById("contact-form");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-
-      console.log("sending...");
-
-      const res = await forminit.submit(FORM_ID, formData);
-
-      console.log(res);
-    });
-  });
 </script>
 
 <div class="cookie-consent" id="cookie-consent">
