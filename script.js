@@ -211,135 +211,175 @@ setupToggleCards('.formats [data-toggle-card]');
 setupToggleCards('.faq [data-toggle-card]');
 
 
-// ===== FORM =====
+
+ // ===== FORM: WEB3FORMS =====
 const consultForm = document.querySelector('.consult-form');
 
 if (consultForm) {
+    const submitButton = consultForm.querySelector('[type="submit"]');
+    const statusElement = consultForm.querySelector('.consult-form__status');
 
+    let isSubmitting = false;
     let lastSubmitTime = 0;
-    let lastPayload = '';
+    let lastSuccessfulPayload = '';
     let formOpenedAt = Date.now();
 
+    function showFormStatus(message, state) {
+        if (!statusElement) return;
+
+        statusElement.textContent = message;
+        statusElement.dataset.state = state;
+    }
+
     function isGarbageText(text) {
+        const clean = text.toLowerCase().replace(/\s/g, '');
 
-        const clean = text
-            .toLowerCase()
-            .replace(/\s/g, '');
+        if (!clean) return false;
 
-        const repeatedPattern = /(.)\1{4,}/i;
-
-        if (repeatedPattern.test(clean)) {
-            return true;
-        }
+        if (/(.)\1{4,}/i.test(clean)) return true;
 
         const uniqueChars = new Set(clean).size;
 
-        if (clean.length > 10 && uniqueChars < 4) {
-            return true;
-        }
+        if (clean.length > 10 && uniqueChars < 4) return true;
 
         const hasVowels = /[aeiouаеёиоуыэюя]/i.test(clean);
 
-        if (clean.length > 6 && !hasVowels) {
-            return true;
-        }
+        if (clean.length > 6 && !hasVowels) return true;
 
         return false;
     }
 
-    consultForm.addEventListener('submit', (e) => {
+    document.querySelectorAll('[data-open-consult]').forEach((button) => {
+        button.addEventListener('click', () => {
+            formOpenedAt = Date.now();
+            showFormStatus('', '');
+        });
+    });
 
-        // ===== HTML VALIDATION =====
+    consultForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (isSubmitting) return;
 
         if (!consultForm.checkValidity()) {
-
-            e.preventDefault();
             consultForm.reportValidity();
-
             return;
         }
-
-        // ===== ANTISPAM TIME =====
 
         const now = Date.now();
 
         if (now - lastSubmitTime < 10000) {
-
-            e.preventDefault();
-
-            alert('Подождите немного перед повторной отправкой.');
-
+            showFormStatus(
+                'Подождите немного перед повторной отправкой.',
+                'error'
+            );
             return;
         }
 
-        // ===== TOO FAST =====
-
-        const timeSpent = Date.now() - formOpenedAt;
-
-        if (timeSpent < 3000) {
-
-            e.preventDefault();
-
+        if (now - formOpenedAt < 3000) {
+            showFormStatus(
+                'Пожалуйста, проверьте данные перед отправкой.',
+                'error'
+            );
             return;
         }
 
-        // ===== HONEYPOT =====
+        const honeypot = consultForm.querySelector('[name="botcheck"]');
 
-        const honeypot =
-            consultForm.querySelector('[name="website"]');
+        if (honeypot && honeypot.checked) return;
 
-        if (honeypot && honeypot.value.trim() !== '') {
-
-            e.preventDefault();
-
-            return;
-        }
-
-        // ===== GARBAGE TEXT =====
-
-        const message =
-            consultForm.querySelector('textarea[name="comment"]');
+        const message = consultForm.querySelector('[name="message"]');
 
         if (message && isGarbageText(message.value)) {
-
-            e.preventDefault();
-
-            alert('Введите корректные данные.');
-
+            showFormStatus('Проверьте текст комментария.', 'error');
             return;
         }
 
-        // ===== DUPLICATE PAYLOAD =====
+        const formData = new FormData(consultForm);
+        const payload = JSON.stringify([...formData.entries()]);
 
-        const data = new FormData(consultForm);
-
-        const payload =
-            JSON.stringify(Object.fromEntries(data));
-
-        if (payload === lastPayload) {
-
-            e.preventDefault();
-
+        if (payload === lastSuccessfulPayload) {
+            showFormStatus(
+                'Эта заявка уже была отправлена.',
+                'error'
+            );
             return;
         }
 
-        lastPayload = payload;
-        lastSubmitTime = now;
+        isSubmitting = true;
+        if (submitButton) submitButton.disabled = true;
 
-        // ===== SUCCESS =====
+        showFormStatus('Отправляем заявку…', 'pending');
 
-        setTimeout(() => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-            closeModal('consult-modal');
+        try {
+            const response = await fetch(
+                'https://api.web3forms.com/submit',
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        Accept: 'application/json'
+                    },
+                    signal: controller.signal
+                }
+            );
+
+            let result;
+
+            try {
+                result = await response.json();
+            } catch {
+                throw new Error('Некорректный ответ сервиса.');
+            }
+
+            if (!response.ok || result.success !== true) {
+                throw new Error(
+                    result.message || 'Сервис не подтвердил отправку.'
+                );
+            }
+
+            lastSuccessfulPayload = payload;
+            lastSubmitTime = Date.now();
+
+            showFormStatus(
+                'Заявка принята сервисом. Спасибо!',
+                'success'
+            );
 
             consultForm.reset();
-
             formOpenedAt = Date.now();
 
-        }, 300);
+            // Даём человеку увидеть подтверждение перед закрытием.
+            setTimeout(() => {
+                closeModal('consult-modal');
+                showFormStatus('', '');
+            }, 1800);
 
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                showFormStatus(
+                    'Сервис отвечает слишком долго. Проверьте соединение и попробуйте снова.',
+                    'error'
+                );
+            } else {
+                showFormStatus(
+                    'Не удалось подтвердить отправку. Проверьте соединение и попробуйте позже.',
+                    'error'
+                );
+            }
+
+            console.error('Ошибка отправки формы:', error);
+
+        } finally {
+            clearTimeout(timeoutId);
+            isSubmitting = false;
+
+            if (submitButton) submitButton.disabled = false;
+        }
     });
-
 }
 
 
