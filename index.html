@@ -605,53 +605,104 @@
         <div class="modal__panel consult-modal">
             <h3 class="modal__title">Запись на консультацию</h3>
             <p class="modal__lead">Оставьте данные и я свяжусь с вами в ближайшее время.</p>
-   <form class="consult-form"
-      action="https://formsubmit.co/lana.tabakova@gmail.com"
-      method="POST">
-<input 
+   
+<form class="consult-form">
+  <input
+    type="hidden"
+    name="access_key"
+    value="a1376609-b4dd-4e49-8645-e458b9c654b5"
+  />
+
+  <input
+    type="hidden"
+    name="subject"
+    value="Новая заявка с сайта Светланы Табаковой"
+  />
+
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    style="display: none;"
+    tabindex="-1"
+    autocomplete="off"
+  />
+
+  <input
     type="text"
-    name="fi-sender-firstName"
+    name="name"
     placeholder="Имя Фамилия"
     required
     minlength="3"
     pattern="^[А-Яа-яA-Za-zЁё\s-]+$"
     title="Введите имя и фамилию буквами"
-/>
-<input 
+  />
+
+  <input
     type="tel"
-    name="fi-sender-phone"
+    name="phone"
     placeholder="Телефон"
     required
     pattern="^\+[1-9]\d{10,14}$"
     title="Введите номер в международном формате. Например: +79991234567"
-/>
-    <input type="email" name="fi-sender-email" placeholder="E-mail" required />
-    <textarea name="fi-text-message" placeholder="Можете оставить ваш комментарий"></textarea>
+  />
 
-<label class="consent-row first-row">
-    <input type="checkbox" id="privacy" name="fi-consent-privacy" required />
+  <input
+    type="email"
+    name="email"
+    placeholder="E-mail"
+    required
+  />
+
+  <textarea
+    name="message"
+    placeholder="Можете оставить ваш комментарий"
+  ></textarea>
+
+  <label class="consent-row first-row">
+    <input
+      type="checkbox"
+      id="privacy"
+      name="consent_privacy"
+      value="yes"
+      required
+    />
     <span class="consent-text">
-        Я согласен с
-        <a href="source/Politika_konfidentsialnosti_2026.pdf" class="doc-link" target="_blank" rel="noopener">
-            Политикой конфиденциальности
-        </a>
+      Я согласен с
+      <a
+        href="source/Politika_konfidentsialnosti_2026.pdf"
+        class="doc-link"
+        target="_blank"
+        rel="noopener"
+      >Политикой конфиденциальности</a>
     </span>
-</label>
+  </label>
 
-<label class="consent-row">
-    <input type="checkbox" id="offer" name="fi-consent-offer" required />
+  <label class="consent-row">
+    <input
+      type="checkbox"
+      id="offer"
+      name="consent_offer"
+      value="yes"
+      required
+    />
     <span class="consent-text">
-        Я принимаю условия
-        <a href="source/Publichnaya_oferta_2026.pdf" class="doc-link" target="_blank" rel="noopener">
-            Публичной оферты
-        </a>
+      Я принимаю условия
+      <a
+        href="source/Publichnaya_oferta_2026.pdf"
+        class="doc-link"
+        target="_blank"
+        rel="noopener"
+      >Публичной оферты</a>
     </span>
-</label>
+  </label>
 
+  <p class="consult-form__status" role="status" aria-live="polite"></p>
 
-    <button type="submit" class="btn btn--light btn--submit btn--cta">
-        Записаться
-    </button>
+  <button
+    type="submit"
+    class="btn btn--light btn--submit btn--cta"
+  >Записаться</button>
 </form>
         </div>
     </div>
@@ -714,8 +765,8 @@ lightbox.addEventListener('click', () => {
 </div>
 
 <script>
-const phoneInput = document.querySelector('input[name="fi-sender-phone"]');
-const nameInput = document.querySelector('input[name="fi-sender-firstName"]');
+const phoneInput = document.querySelector('input[name="phone"]');
+const nameInput = document.querySelector('input[name="name"]');
 
 phoneInput.addEventListener('invalid', () => {
     phoneInput.setCustomValidity(
