@@ -212,6 +212,7 @@ setupToggleCards('.faq [data-toggle-card]');
 
 
 
+
 // ===== FORM =====
 
 const CONSULT_SCRIPT_URL =
@@ -225,6 +226,7 @@ if (consultForm) {
     let lastPayload = '';
     let formOpenedAt = Date.now();
     let responseTimer = null;
+    let activeRequestId = null;
 
     const status = consultForm.querySelector('.consult-form__status');
     const submitButton = consultForm.querySelector('[type="submit"]');
@@ -294,18 +296,21 @@ if (consultForm) {
     // Получаем ответ от Google Apps Script
     window.addEventListener('message', (event) => {
 
-        if (event.source !== responseFrame.contentWindow) {
-            return;
-        }
-
         const result = event.data;
 
-        if (!result || result.type !== 'consult-form-result') {
+        if (
+            !result ||
+            result.type !== 'consult-form-result' ||
+            !activeRequestId ||
+            result.requestId !== activeRequestId
+        ) {
             return;
         }
 
         clearTimeout(responseTimer);
         setLoading(false);
+
+        activeRequestId = null;
 
         if (result.success) {
 
@@ -407,6 +412,9 @@ if (consultForm) {
 
         const data = new FormData(consultForm);
 
+        // Не включаем request_id в проверку дубликатов
+        data.delete('request_id');
+
         const payload =
             JSON.stringify(Object.fromEntries(data.entries()));
 
@@ -418,6 +426,21 @@ if (consultForm) {
         lastSubmitTime = now;
 
         // ===== SEND =====
+
+        // Создаём уникальный идентификатор отправки
+        activeRequestId = crypto.randomUUID();
+
+        let requestIdInput =
+            consultForm.querySelector('[name="request_id"]');
+
+        if (!requestIdInput) {
+            requestIdInput = document.createElement('input');
+            requestIdInput.type = 'hidden';
+            requestIdInput.name = 'request_id';
+            consultForm.appendChild(requestIdInput);
+        }
+
+        requestIdInput.value = activeRequestId;
 
         setLoading(true);
 
@@ -433,6 +456,7 @@ if (consultForm) {
 
             setLoading(false);
             lastPayload = '';
+            activeRequestId = null;
 
             setStatus(
                 'Не удалось отправить заявку. Попробуйте ещё раз.',
@@ -447,6 +471,7 @@ if (consultForm) {
         responseTimer = setTimeout(() => {
 
             setLoading(false);
+            activeRequestId = null;
 
             setStatus(
                 'Не удалось получить подтверждение. Проверьте отправку перед повторной попыткой.',
